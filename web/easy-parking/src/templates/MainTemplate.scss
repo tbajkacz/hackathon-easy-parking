@@ -1,0 +1,47 @@
+.nav-wrapper {
+  display: flex;
+  background-color: #1565c0;
+  padding: 0;
+}
+.navlink-topMenu {
+  padding: 10px;
+}
+.navbar-buttons {
+  color: white;
+}
+.btn-signOut {
+  transition: 0.1s linear;
+  &:hover {
+    background-color: #134986;
+  }
+}
+.sidebar-wrapper {
+  min-height: calc(100vh - 45px);
+}
+
+.sidebar-wrapper .list-group {
+  width: 15rem;
+}
+
+.sidebar-ul {
+  width: 12rem;
+}
+.sidebar-li {
+  display: flex;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 16px;
+  transition: 0.1s linear;
+  &:hover {
+    background-color: #ddd;
+    cursor: pointer;
+  }
+}
+
+.icon-sidebar {
+  filter: invert(24%) sepia(8%) saturate(504%) hue-rotate(189deg) brightness(88%) contrast(85%);
+}
+
+.sidebar-item {
+  color: #4e5057;
+  margin-left: 5px;
+}
