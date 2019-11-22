@@ -5,8 +5,9 @@ export interface CurrentUser {
 }
 
 export interface SignInCredentials {
-  email: string;
+  login: string;
   password: string;
+  rememberMe: boolean;
 }
 
 export interface Auth {

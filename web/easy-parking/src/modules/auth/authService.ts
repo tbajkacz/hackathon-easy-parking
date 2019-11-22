@@ -3,14 +3,10 @@ import { CurrentUser, SignInCredentials } from "./authTypes";
 import { unwrap } from "../../common/serviceUtility";
 import { ApiResponse } from "../../common/types";
 
-const signIn = (
-  params?: SignInCredentials
-): Promise<ApiResponse<CurrentUser>> => {
-  return axios
-    .post<ApiResponse<CurrentUser>>("auth/SignIn", {
-      params
-    })
-    .then(unwrap);
+const signIn = (params?: SignInCredentials): Promise<ApiResponse<CurrentUser>> => {
+  console.log(params);
+
+  return axios.post<ApiResponse<CurrentUser>>("auth/SignIn", params).then(unwrap);
 };
 
 const signUp = (): Promise<ApiResponse<CurrentUser>> => {
@@ -22,9 +18,7 @@ const signOut = () => {
 };
 
 const getCurrentUser = (): Promise<ApiResponse<CurrentUser>> => {
-  return axios
-    .get<ApiResponse<CurrentUser>>("auth/GetCurrentUser")
-    .then(unwrap);
+  return axios.get<ApiResponse<CurrentUser>>("auth/GetCurrentUser").then(unwrap);
 };
 
 const authService = {

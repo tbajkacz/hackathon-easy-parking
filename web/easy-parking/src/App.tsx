@@ -17,7 +17,7 @@ const App: React.FC = () => {
           <Route path={routes.register} component={SignUp} />
           <Route exact path={routes.main} component={Reservation} />
           <Route exact path={routes.settings} component={SettingsPanel} />
-          <Redirect to={routes.login} />
+          {/* <Redirect to={routes.login} /> */}
         </Switch>
       </HashRouter>
     </ProvideAuth>
