@@ -1,7 +1,11 @@
-export interface CurrentUser {
-  username: string;
+export interface UserAccount {
+  id: number;
+  name: string;
+  surname: string;
   email: string;
-  password: string;
+  balance: number;
+  login: string;
+  roles: string[];
 }
 
 export interface SignInCredentials {
@@ -22,5 +26,5 @@ export interface Auth {
   signIn: (params?: SignInCredentials) => void;
   signUp: (params?: SignUpCredentials) => void;
   signOut: () => void;
-  currentUser?: CurrentUser;
+  currentUser?: UserAccount;
 }

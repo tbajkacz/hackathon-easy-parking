@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import authService from "./authService";
-import { SignInCredentials, CurrentUser, Auth, SignUpCredentials } from "./authTypes";
+import { SignInCredentials, UserAccount, Auth, SignUpCredentials } from "./authTypes";
 import LoadingIndicator from "../../utils/LoadingIndicator";
 
 export const AuthContext = React.createContext<Auth>({
@@ -28,7 +28,7 @@ export function ProvideAuth(props: ProvideAuthProps) {
 }
 
 export function useProvideAuth() {
-  const [currentUser, setCurrentUser] = useState<CurrentUser>();
+  const [currentUser, setCurrentUser] = useState<UserAccount>();
   const [promise, setPromise] = useState<Promise<any> | undefined>();
 
   const signIn = (params?: SignInCredentials) => {
