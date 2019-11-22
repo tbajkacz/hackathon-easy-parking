@@ -16,6 +16,7 @@ using System.Linq;
 using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using EasyParking.Parkings.Services;
 
 namespace EasyParking.Extensions
 {
@@ -34,7 +35,10 @@ namespace EasyParking.Extensions
         }
 
         public static IServiceCollection AddNHibernateRepositories(this IServiceCollection services)
-            => services.AddTransient<IUserRepository, NHibernateUserRepository>();
+            => services.AddTransient<IUserRepository, NHibernateUserRepository>()
+                       .AddTransient<IParkingRepository, NHibernateParkingRepository>()
+                       .AddTransient<IParkingSpotRepository, NHibernateParkingSpotRepository>()
+                       .AddTransient<IReservationRepository, NHibernateReservationRepository>();
 
         public static AuthenticationBuilder AddCookieAuthentication(this IServiceCollection services, CookieSecurePolicy cookieSecurePolicy)
             => services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
