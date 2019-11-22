@@ -6,7 +6,7 @@ namespace EasyParking.Utility
     {
         public static bool AreOverlapping(DateTime aStart, DateTime aEnd, DateTime bStart, DateTime bEnd)
         {
-            return aStart < bEnd && bStart < aEnd;
+            return aStart.ToUniversalTime() < bEnd.ToUniversalTime() && bStart.ToUniversalTime() < aEnd.ToUniversalTime();
         }
     }
 }
