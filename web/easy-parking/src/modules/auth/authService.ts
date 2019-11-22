@@ -14,7 +14,7 @@ const signUp = (): Promise<ApiResponse<CurrentUser>> => {
 };
 
 const signOut = () => {
-  return axios.post<ApiResponse<undefined>>("auth/SignOut").then(unwrap);
+  return axios.get<ApiResponse<undefined>>("auth/SignOut").then(unwrap);
 };
 
 const getCurrentUser = (): Promise<ApiResponse<CurrentUser>> => {

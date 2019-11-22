@@ -1,3 +1,5 @@
+@import "../../../node_modules/bootstrap";
+
 .container-main {
   height: 100vh;
   background-image: url("../../assets/img/bg3.jpg");
@@ -8,10 +10,11 @@
 }
 
 .wrap-form {
+  @extend .col-sm-10;
+  @extend .col-md-4;
   background-color: rgba(255, 255, 255, 0.849);
   margin: 80px auto 10px;
   padding: 25px 50px;
-  width: 500px;
   min-height: 300px;
   border-radius: 5px;
 }

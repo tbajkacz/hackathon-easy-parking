@@ -3,12 +3,17 @@ import "./MainTemplate.scss";
 import { NavLink } from "react-router-dom";
 import { routes } from "../routes";
 import iconSettings from "../assets/img/cog-solid.svg";
+import { useAuth } from "../modules/auth/authContext";
 
 interface MainTemplateProps {
   children: React.ReactNode;
 }
 
 const MainTemplate: React.FC<MainTemplateProps> = ({ children }) => {
+  const { signOut } = useAuth();
+  const handleSignOut = () => {
+    signOut();
+  };
   return (
     <>
       {/*=== Top Menu =====*/}
@@ -18,6 +23,7 @@ const MainTemplate: React.FC<MainTemplateProps> = ({ children }) => {
         </NavLink>
         <NavLink
           to={routes.login}
+          onClick={() => handleSignOut()}
           style={{ textDecoration: "none", padding: "10px", marginRight: "10px" }}
           className="btn-signOut"
         >
