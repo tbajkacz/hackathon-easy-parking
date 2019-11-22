@@ -13,11 +13,11 @@ const App: React.FC = () => {
     <ProvideAuth>
       <HashRouter>
         <Switch>
-          <Route path={routes.login} component={SignIn} />
-          <Route path={routes.register} component={SignUp} />
+          <Route exact path={routes.login} component={SignIn} />
+          <Route exact path={routes.register} component={SignUp} />
           <Route exact path={routes.main} component={Reservation} />
           <Route exact path={routes.settings} component={SettingsPanel} />
-          <Redirect to={routes.login} />
+          {/* <Redirect to={routes.login} /> */}
         </Switch>
       </HashRouter>
     </ProvideAuth>

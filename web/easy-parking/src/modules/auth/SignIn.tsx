@@ -1,41 +1,52 @@
 import React, { useState } from "react";
 import "./SignIn.scss";
-import { NavLink } from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
 import { routes } from "../../routes";
 import logoSignIn from "../../assets/img/icon-lock.svg";
 import { SignInCredentials } from "./authTypes";
+import { useAuth } from "./authContext";
+import authService from "./authService";
 
 interface SignInProps {}
 
 const SignIn: React.FC<SignInProps> = props => {
+  const { signIn, currentUser } = useAuth();
   const [signInData, setSignInData] = useState<SignInCredentials>({
-    email: "",
-    password: ""
+    login: "",
+    password: "",
+    rememberMe: true
   });
 
-  const handleSignIn = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeSignIn = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
     const value = e.target.value;
     setSignInData({ ...signInData, [name]: value });
   };
 
+  const handlePostSignIn = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    signIn(signInData);
+  };
+  if (currentUser) {
+    return <Redirect to={routes.main} />;
+  }
   return (
     <div className="container-main">
-      <form className="wrap-form">
+      <form className="wrap-form" onSubmit={e => handlePostSignIn(e)}>
         <div className="form-group">
           <div className="avatar">
             <img src={logoSignIn} alt="sign in" className="logo-signIn" />
             <span className="logo-subtitle">Sign In</span>
           </div>
           <input
-            type="email"
+            type="input"
             className="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
-            placeholder="Email"
+            placeholder="Login"
             autoFocus
-            name="email"
-            onChange={e => handleSignIn(e)}
+            name="login"
+            onChange={e => handleChangeSignIn(e)}
           />
         </div>
 
@@ -46,16 +57,15 @@ const SignIn: React.FC<SignInProps> = props => {
             id="exampleInputPassword1"
             placeholder="Password"
             name="password"
-            onChange={e => handleSignIn(e)}
+            onChange={e => handleChangeSignIn(e)}
           />
         </div>
 
         <div className="wrap-buttons">
-          <NavLink to={routes.main}>
-            <button type="submit" className="btn btn-primary btn-signIn">
-              Sign In
-            </button>
-          </NavLink>
+          <button type="submit" className="btn btn-primary btn-signIn">
+            Sign In
+          </button>
+
           <NavLink to={routes.register} className="link-to-sign-up">
             {" "}
             Don't have an account? Sign Up

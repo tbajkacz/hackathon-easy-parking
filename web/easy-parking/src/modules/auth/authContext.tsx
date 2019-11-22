@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import authService from "./authService";
-// import LoadingIndicator from "../LoadingIndicator";
-import { SignInCredentials, CurrentUser, Auth } from "./authTypes";
+import { SignInCredentials, CurrentUser, Auth, SignUpCredentials } from "./authTypes";
+import LoadingIndicator from "../../utils/LoadingIndicator";
 
 export const AuthContext = React.createContext<Auth>({
   signIn: () => null,
-  signOut: () => null
+  signOut: () => null,
+  signUp: () => null
 });
 
 export const useAuth = () => {
@@ -20,10 +21,9 @@ export function ProvideAuth(props: ProvideAuthProps) {
   const { Provider } = AuthContext;
   const { promise, ...auth } = useProvideAuth();
   return (
-    // <LoadingIndicator promise={promise}>
-    // <Provider value={auth}>{props.children}</Provider>
-    <Provider value={auth}>{props.children}</Provider>
-    // </LoadingIndicator>
+    <LoadingIndicator promise={promise}>
+      <Provider value={auth}>{props.children}</Provider>
+    </LoadingIndicator>
   );
 }
 
@@ -35,10 +35,17 @@ export function useProvideAuth() {
     authService.signIn(params).then(r => {
       setPromise(
         authService.getCurrentUser().then(r => {
-          // setCurrentUser(r.result);
+          setCurrentUser(r.result);
         })
       );
     });
+  };
+
+  const signUp = (params?: SignUpCredentials) => {
+    let promise = authService.signUp(params).then(r => {
+      signIn({ login: params!.login, password: params!.password, rememberMe: true });
+    });
+    setPromise(promise);
   };
 
   const signOut = () => {
@@ -49,10 +56,10 @@ export function useProvideAuth() {
   useEffect(() => {
     setPromise(
       authService.getCurrentUser().then(user => {
-        // setCurrentUser(user.result);
+        setCurrentUser(user.result);
       })
     );
   }, []);
 
-  return { currentUser, signIn, signOut, promise };
+  return { currentUser, signIn, signOut, promise, signUp };
 }
