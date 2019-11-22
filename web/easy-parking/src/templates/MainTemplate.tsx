@@ -1,55 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 import "./MainTemplate.scss";
 import { NavLink } from "react-router-dom";
 import { routes } from "../routes";
 import iconSettings from "../assets/img/cog-solid.svg";
 import { useAuth } from "../modules/auth/authContext";
-
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem } from "reactstrap";
 interface MainTemplateProps {
   children: React.ReactNode;
 }
 
 const MainTemplate: React.FC<MainTemplateProps> = ({ children }) => {
+  const [collapsed, setCollapsed] = useState<boolean>(true);
+
+  const toggleNavbar = () => setCollapsed(!collapsed);
+
   const { signOut } = useAuth();
   const handleSignOut = () => {
     signOut();
   };
   return (
     <>
-      {/*=== Top Menu =====*/}
-      <nav className="navbar navbar-light border-bottom nav-wrapper">
-        <NavLink to={routes.main} style={{ textDecoration: "none", padding: "10px" }}>
-          <span className="navbar-buttons">Parking App</span>
+      <Navbar color="faded" light className="nav-wrapper">
+        <NavLink to={routes.main} className="mr-auto item-color">
+          Easy Parking
         </NavLink>
-        <NavLink
-          to={routes.login}
-          onClick={() => handleSignOut()}
-          style={{ textDecoration: "none", padding: "10px", marginRight: "10px" }}
-          className="btn-signOut"
-        >
-          <span className="navbar-buttons">Sign Out</span>
-        </NavLink>
-      </nav>
+        <NavbarToggler onClick={toggleNavbar} className="mr-2" />
+        <Collapse isOpen={!collapsed} navbar>
+          <Nav navbar>
+            <NavItem className="nav-item item-color">
+              <NavLink to={routes.main} className="nav-link">
+                <span className="nav-detail"> Reservation</span>
+              </NavLink>
+            </NavItem>
+            <NavItem className="nav-item">
+              <NavLink to={routes.settings} className="nav-link item-color">
+                <span className="nav-detail">Settings</span>
+              </NavLink>
+            </NavItem>
+            <NavItem className="nav-item">
+              <NavLink to={routes.login} className="nav-link item-color" onClick={() => handleSignOut()}>
+                <span className="nav-detail">Sign Out</span>
+              </NavLink>
+            </NavItem>
+          </Nav>
+        </Collapse>
+      </Navbar>
 
-      {/* =====Sidebar===== */}
-      <div className="d-flex">
-        <div className="bg-light border-right sidebar-wrapper">
-          <ul className="nav navbar-nav sidebar-ul">
-            <NavLink to={routes.main} style={{ textDecoration: "none" }}>
-              <li className="sidebar-li">
-                <span className="sidebar-item">Reservation</span>
-              </li>
-            </NavLink>
-            <NavLink to={routes.settings} style={{ textDecoration: "none" }}>
-              <li className="sidebar-li">
-                <img src={iconSettings} alt="settings" width="15px" className="icon-sidebar" />
-                <span className="sidebar-item">Settings</span>
-              </li>
-            </NavLink>
-          </ul>
-        </div>
-        {children}
-      </div>
+      <div className="d-flex">{children}</div>
     </>
   );
 };
