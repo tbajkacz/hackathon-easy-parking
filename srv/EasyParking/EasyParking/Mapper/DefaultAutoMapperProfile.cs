@@ -24,7 +24,10 @@ namespace EasyParking.Mapper
                 .ForMember(p => p.Owner, mce => mce.MapFrom<ParkingAddOwnerResolver>())
                 .ForMember(p => p.ParkingSpots, mce => mce.MapFrom<ParkingAddSpotsResolver>());
             CreateMap<ParkingSpot, ParkingSpotDto>();
-            
+            CreateMap<Reservation, ReservationParkingDto>();
+            CreateMap<Reservation, ReservationDto>();
+            CreateMap<ParkingSpot, ParkingSpotReservationDto>();
+            CreateMap<Parking, ParkingReservationDto>();
         }
     }
 }

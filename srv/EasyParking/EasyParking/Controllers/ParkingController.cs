@@ -38,6 +38,12 @@ namespace EasyParking.Controllers
                 .Select(p => mapper.Map<Parking, ParkingDto>(p));
         }
 
+        [HttpGet]
+        public async Task<ParkingDto> GetById(int id)
+        {
+            return mapper.Map<Parking, ParkingDto>(await parkingRepository.GetByIdAsync(id));
+        }
+
         [HttpPost]
         public async Task Add(ParkingAddParams param)
         {
