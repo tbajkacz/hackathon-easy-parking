@@ -1,16 +1,14 @@
 import axios from "axios";
-import { CurrentUser, SignInCredentials } from "./authTypes";
+import { CurrentUser, SignInCredentials, SignUpCredentials } from "./authTypes";
 import { unwrap } from "../../common/serviceUtility";
 import { ApiResponse } from "../../common/types";
 
 const signIn = (params?: SignInCredentials): Promise<ApiResponse<CurrentUser>> => {
-  console.log(params);
-
   return axios.post<ApiResponse<CurrentUser>>("auth/SignIn", params).then(unwrap);
 };
 
-const signUp = (): Promise<ApiResponse<CurrentUser>> => {
-  return axios.post<ApiResponse<CurrentUser>>("auth/Register").then(unwrap);
+const signUp = (params?: SignUpCredentials): Promise<ApiResponse<CurrentUser>> => {
+  return axios.post<ApiResponse<CurrentUser>>("auth/Register", params).then(unwrap);
 };
 
 const signOut = () => {

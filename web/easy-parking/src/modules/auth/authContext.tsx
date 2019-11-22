@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import authService from "./authService";
-import { SignInCredentials, CurrentUser, Auth } from "./authTypes";
+import { SignInCredentials, CurrentUser, Auth, SignUpCredentials } from "./authTypes";
 import LoadingIndicator from "../../utils/LoadingIndicator";
 
 export const AuthContext = React.createContext<Auth>({
   signIn: () => null,
-  signOut: () => null
+  signOut: () => null,
+  signUp: () => null
 });
 
 export const useAuth = () => {
@@ -40,6 +41,13 @@ export function useProvideAuth() {
     });
   };
 
+  const signUp = (params?: SignUpCredentials) => {
+    let promise = authService.signUp(params).then(r => {
+      signIn({ login: params!.login, password: params!.password, rememberMe: true });
+    });
+    setPromise(promise);
+  };
+
   const signOut = () => {
     setPromise(authService.signOut());
     setCurrentUser(undefined);
@@ -53,5 +61,5 @@ export function useProvideAuth() {
     );
   }, []);
 
-  return { currentUser, signIn, signOut, promise };
+  return { currentUser, signIn, signOut, promise, signUp };
 }
