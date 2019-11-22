@@ -19,7 +19,7 @@ export default function LoadingIndicator(props: LoadingIndicatorProps) {
   const renderLoadingIndicator = () => {
     const loadingIndicator = (
       <div className="d-flex justify-content-center">
-        <FontAwesomeIcon icon={faSpinner} spin={true} color="white" size="2x" />
+        <FontAwesomeIcon icon={faSpinner} spin={true} color="black" size="2x" />
       </div>
     );
     // console.log(props.asModal);
@@ -42,7 +42,7 @@ export default function LoadingIndicator(props: LoadingIndicatorProps) {
         setIsCompleted(true);
       }
     );
-    return <div>{isCompleted ? props.children : renderLoadingIndicator()}</div>;
+    return <div style={{ width: "100%" }}>{isCompleted ? props.children : renderLoadingIndicator()}</div>;
   }
   return <div>{props.children}</div>;
 }

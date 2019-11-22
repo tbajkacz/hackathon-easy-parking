@@ -13,4 +13,15 @@
 .parking-list-li {
   width: 100%;
   text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.parking-list-data {
+  flex-grow: 1;
+}
+
+.parking-list-amount-parking-spot {
+  align-self: center;
+  justify-self: flex-end;
 }
