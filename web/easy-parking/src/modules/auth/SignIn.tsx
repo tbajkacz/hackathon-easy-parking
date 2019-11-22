@@ -28,7 +28,7 @@ const SignIn: React.FC<SignInProps> = props => {
     signIn(signInData);
   };
   if (currentUser) {
-    return <Redirect to={routes.main} />;
+    return <Redirect to={routes.reservation} />;
   }
   return (
     <div className="container-main">

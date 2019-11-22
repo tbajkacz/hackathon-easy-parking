@@ -34,7 +34,7 @@ const SignUp: React.FC<SignUpProps> = props => {
   };
 
   if (currentUser) {
-    return <Redirect to={routes.main} />;
+    return <Redirect to={routes.reservation} />;
   }
 
   return (
