@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import "./MainTemplate.scss";
 import { NavLink } from "react-router-dom";
 import { routes } from "../routes";
-import iconSettings from "../assets/img/cog-solid.svg";
 import { useAuth } from "../modules/auth/authContext";
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem } from "reactstrap";
+import { Collapse, Navbar, NavbarToggler, Nav, NavItem } from "reactstrap";
 interface MainTemplateProps {
   children: React.ReactNode;
 }
