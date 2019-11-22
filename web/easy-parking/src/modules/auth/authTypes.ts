@@ -10,7 +10,7 @@ export interface SignInCredentials {
 }
 
 export interface Auth {
-  signIn?: (params?: SignInCredentials) => void;
+  signIn: (params?: SignInCredentials) => void;
   signOut: () => void;
   currentUser?: CurrentUser;
 }
