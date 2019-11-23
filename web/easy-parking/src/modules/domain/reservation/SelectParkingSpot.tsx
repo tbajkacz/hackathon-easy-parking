@@ -57,13 +57,23 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
     }
   };
 
+  const [vehicleRegistration, setVehicleRegistration] = useState<string>("");
+  const handleVehicleRegistrationNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setVehicleRegistration(e.target.value);
+    setReserveData({
+      ...reserveData,
+      [e.target.name]: e.target.value
+    });
+  };
+
   const [startDate, setStartDate] = useState<Date | null>(roundedDate(30));
   const [endDate, setEndDate] = useState<Date | null>(roundedDataPlusHalfHour());
   const [reserveData, setReserveData] = useState<ReserveData>({
     from: roundedDate(30).toString(),
     to: roundedDataPlusHalfHour().toString(),
     parkingId: 0,
-    spotNumber: 0
+    spotNumber: 0,
+    vehicleRegistrationNumber: ""
   });
   const handleSendReserve = async () => {
     const promise = reservationService.sendReserve(reserveData);
@@ -95,6 +105,7 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
     // const excludeData = flatSelectSpotFrom && flatSelectSpotTo && [...flatSelectSpotFrom, ...flatSelectSpotTo];
     // console.log(flatSelectSpot, "flat");
   };
+  console.log(reserveData);
 
   return (
     <MainTemplate>
@@ -108,8 +119,7 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
             alt="place parking"
             className="selectParkingImage"
           />
-          <FormGroup>
-            <Label for="exampleSelect">Select parking spot:</Label>
+          <FormGroup className="mt-2">
             <Input
               type="select"
               name="spotNumber"
@@ -127,7 +137,7 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
             </Input>
           </FormGroup>
 
-          <div>From</div>
+          <div className="pl-3">From</div>
           <DatePicker
             className="date-picker"
             selected={startDate}
@@ -145,7 +155,7 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
             dateFormat="MMMM d, yyyy h:mm aa"
           />
 
-          <div>To</div>
+          <div className="pl-3">To</div>
           <DatePicker
             className="date-picker"
             selected={endDate}
@@ -160,11 +170,20 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
             ]}
             dateFormat="MMMM d, yyyy h:mm aa"
           />
+
+          <Input
+            type="text"
+            name="vehicleRegistrationNumber"
+            className="my-2 text-center"
+            placeholder="Vehicle registration number"
+            onChange={e => handleVehicleRegistrationNumber(e)}
+          />
+
           <button
             type="button"
-            className="btn btn-primary w-100 mt-2"
+            className="btn btn-primary w-100 mt-2 mb-5 btn-reserve-parking"
             onClick={() => handleSendReserve()}
-            disabled={selectSpot === 0 ? true : false}
+            disabled={selectSpot === 0 || vehicleRegistration === "" ? true : false}
           >
             Reserve parking
           </button>

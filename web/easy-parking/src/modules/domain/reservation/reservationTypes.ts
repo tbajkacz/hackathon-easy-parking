@@ -30,8 +30,9 @@ export interface ReservationParking {
 }
 
 export interface ReserveData {
+  parkingId: number;
+  vehicleRegistrationNumber: string;
+  spotNumber: number;
   from: string;
   to: string;
-  parkingId: number;
-  spotNumber: number;
 }
