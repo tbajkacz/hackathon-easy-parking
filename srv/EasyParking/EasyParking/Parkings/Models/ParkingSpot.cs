@@ -9,7 +9,7 @@ namespace EasyParking.Parkings.Models
 
         public virtual IList<Reservation> Reservations { get; set; }
 
-        public virtual Parking Parent { get; set; }
+        public virtual Parking Parking { get; set; }
     }
 
     public class ParkingSpotMap : EntityMap<ParkingSpot, int>
@@ -19,7 +19,7 @@ namespace EasyParking.Parkings.Models
             Map(x => x.SpotNumber);
             HasMany(x => x.Reservations)
                 .Cascade.SaveUpdate();
-            References(x => x.Parent);
+            References(x => x.Parking);
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using EasyParking.Parkings.Models;
-
-namespace EasyParking.Parkings.Dto
+﻿namespace EasyParking.Parkings.Dto
 {
     public class ParkingSpotReservationDto
     {
@@ -8,6 +6,6 @@ namespace EasyParking.Parkings.Dto
 
         public int SpotNumber { get; set; }
 
-        public ParkingReservationDto Parent { get; set; }
+        public ParkingReservationDto Parking { get; set; }
     }
 }
