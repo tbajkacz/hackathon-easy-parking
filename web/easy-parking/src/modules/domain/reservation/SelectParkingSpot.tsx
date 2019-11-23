@@ -13,6 +13,7 @@ import { FormGroup, Label, Input } from "reactstrap";
 import { formatDate } from "../../../utils/formatDate";
 import { roundedDate, roundedDataPlusHalfHour } from "../../../utils/roundedDate";
 import { routes } from "../../../routes";
+import moment from "moment";
 
 interface SelectParkingSpotProps {}
 
@@ -134,6 +135,19 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
   };
   console.log(reserveData);
 
+  const isDisabledByDate = () => {
+    if (startDate && endDate && dayBasedExcludeCollection) {
+      return (
+        dayBasedExcludeCollection.filter(
+          c =>
+            moment(c).format("YYYYMMDDHHmm") === moment(startDate).format("YYYYMMDDHHmm") ||
+            moment(c).format("YYYYMMDDHHmm") === moment(endDate).format("YYYYMMDDHHmm")
+        ).length !== 0
+      );
+    }
+    return false;
+  };
+
   return (
     <MainTemplate>
       <LoadingIndicator promise={promise}>
@@ -206,7 +220,7 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
               type="button"
               className="btn btn-primary w-100 mt-2 mb-5 btn-reserve-parking"
               onClick={() => handleSendReserve()}
-              disabled={selectSpot === 0 || vehicleRegistration === "" ? true : false}
+              disabled={selectSpot === 0 || vehicleRegistration === "" || isDisabledByDate()}
             >
               {buttonContent}
             </button>
