@@ -172,6 +172,9 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
               selected={startDate}
               name="from"
               onChange={date => handleDatePicker(date, "from")}
+              onInputClick={() => {
+                handleDatePicker(startDate, "from");
+              }}
               showTimeSelect
               dateFormat="MMMM d, yyyy h:mm aa"
               excludeTimes={dayBasedExcludeCollection}
@@ -183,6 +186,9 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
               selected={endDate}
               name="to"
               onChange={date => handleDatePicker(date, "to")}
+              onInputClick={() => {
+                handleDatePicker(endDate, "to");
+              }}
               showTimeSelect
               dateFormat="MMMM d, yyyy h:mm aa"
               excludeTimes={dayBasedExcludeCollection}
