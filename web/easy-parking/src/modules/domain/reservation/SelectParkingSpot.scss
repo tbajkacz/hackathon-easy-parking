@@ -13,3 +13,8 @@
   width: 100vw;
   text-align: center;
 }
+
+.btn-primary:disabled {
+  background-color: #555555;
+  border-color: #555555;
+}
