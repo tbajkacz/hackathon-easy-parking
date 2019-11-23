@@ -30,14 +30,14 @@ const UserReservationList: React.FC<UserReservationListProps> = props => {
               userReservationList.map(reservation => {
                 return (
                   <li key={reservation.id} className="list-group-item parking-list-li">
-                    <h5>
+                    <h5 className="text-center">
                       {"Parking " +
                         reservation.reservedSpot.parking.name +
                         ", spot no. " +
                         reservation.reservedSpot.spotNumber}
                     </h5>
-                    <text>{"Reservation period:"}</text>
-                    <div>
+                    <div className="text-center">{"Reservation period:"}</div>
+                    <div className="text-center">
                       {moment(reservation.fromUtc).format(dateFormat) +
                         " - " +
                         moment(reservation.untilUtc).format(dateFormat)}
