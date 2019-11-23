@@ -20,6 +20,10 @@
   text-align: left;
   display: flex;
   justify-content: center;
+
+  &:active {
+    background-color: #b4b4b4;
+  }
 }
 
 .parking-list-data {

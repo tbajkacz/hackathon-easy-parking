@@ -8,6 +8,10 @@
 .nav-item {
   width: 100%;
   text-align: center;
+
+  &:active {
+    background-color: #7f8cfc23;
+  }
 }
 
 .nav-link {
