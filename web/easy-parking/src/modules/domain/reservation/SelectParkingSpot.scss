@@ -10,8 +10,8 @@
 }
 
 .date-picker {
-  width: 100vw;
-  text-align: center;
+  // width: 100vw;
+  width: calc(100vw - 20px);
 }
 
 .btn-primary:disabled {

@@ -142,63 +142,65 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
             alt="place parking"
             className="selectParkingImage"
           />
-          <FormGroup className="mt-2">
+          <div style={{ padding: "5px 10px" }}>
+            <FormGroup className="mt-2">
+              <Input
+                type="select"
+                name="spotNumber"
+                id="exampleSelect"
+                placeholder="Select spot"
+                // value={selectSpot}
+                onChange={e => {
+                  const selectParkingId = selectParking ? selectParking.result.id : 0;
+                  handleChangeSelectSpot(e, selectParkingId);
+                  updateTimeExcludes();
+                }}
+              >
+                <option value="0">Select parking spot</option>
+                {selectParking &&
+                  selectParking.result.parkingSpots.map(spot => <option key={spot.id}>{spot.spotNumber}</option>)}
+              </Input>
+            </FormGroup>
+
+            <div className="pl-3">From</div>
+            <DatePicker
+              className="date-picker pl-3 mb-2"
+              selected={startDate}
+              name="from"
+              onChange={date => handleDatePicker(date, "from")}
+              showTimeSelect
+              dateFormat="MMMM d, yyyy h:mm aa"
+              excludeTimes={dayBasedExcludeCollection}
+            />
+
+            <div className="pl-3">To</div>
+            <DatePicker
+              className="date-picker pl-3 mb-2"
+              selected={endDate}
+              name="to"
+              onChange={date => handleDatePicker(date, "to")}
+              showTimeSelect
+              dateFormat="MMMM d, yyyy h:mm aa"
+              excludeTimes={dayBasedExcludeCollection}
+            />
+
             <Input
-              type="select"
-              name="spotNumber"
-              id="exampleSelect"
-              placeholder="Select spot"
-              // value={selectSpot}
-              onChange={e => {
-                const selectParkingId = selectParking ? selectParking.result.id : 0;
-                handleChangeSelectSpot(e, selectParkingId);
-                updateTimeExcludes();
-              }}
+              type="text"
+              name="vehicleRegistrationNumber"
+              className="my-2"
+              placeholder="Vehicle registration number"
+              onChange={e => handleVehicleRegistrationNumber(e)}
+            />
+
+            <button
+              type="button"
+              className="btn btn-primary w-100 mt-2 mb-5 btn-reserve-parking"
+              onClick={() => handleSendReserve()}
+              disabled={selectSpot === 0 || vehicleRegistration === "" ? true : false}
             >
-              <option value="0">Select parking spot</option>
-              {selectParking &&
-                selectParking.result.parkingSpots.map(spot => <option key={spot.id}>{spot.spotNumber}</option>)}
-            </Input>
-          </FormGroup>
-
-          <div className="pl-3">From</div>
-          <DatePicker
-            className="date-picker"
-            selected={startDate}
-            name="from"
-            onChange={date => handleDatePicker(date, "from")}
-            showTimeSelect
-            dateFormat="MMMM d, yyyy h:mm aa"
-            excludeTimes={dayBasedExcludeCollection}
-          />
-
-          <div className="pl-3">To</div>
-          <DatePicker
-            className="date-picker"
-            selected={endDate}
-            name="to"
-            onChange={date => handleDatePicker(date, "to")}
-            showTimeSelect
-            dateFormat="MMMM d, yyyy h:mm aa"
-            excludeTimes={dayBasedExcludeCollection}
-          />
-
-          <Input
-            type="text"
-            name="vehicleRegistrationNumber"
-            className="my-2 text-center"
-            placeholder="Vehicle registration number"
-            onChange={e => handleVehicleRegistrationNumber(e)}
-          />
-
-          <button
-            type="button"
-            className="btn btn-primary w-100 mt-2 mb-5 btn-reserve-parking"
-            onClick={() => handleSendReserve()}
-            disabled={selectSpot === 0 || vehicleRegistration === "" ? true : false}
-          >
-            {buttonContent}
-          </button>
+              {buttonContent}
+            </button>
+          </div>
         </>
       </LoadingIndicator>
     </MainTemplate>
