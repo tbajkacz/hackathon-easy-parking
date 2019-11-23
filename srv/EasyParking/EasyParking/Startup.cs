@@ -48,7 +48,7 @@ namespace EasyParking
             {
                 cfg.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "RSRL",
+                    Title = "EP",
                     Version = "1.0",
                 });
             });
