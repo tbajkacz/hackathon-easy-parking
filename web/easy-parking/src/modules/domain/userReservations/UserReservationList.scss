@@ -1,0 +1,15 @@
+.delete-wrapper {
+  width: 10px;
+  position: relative;
+}
+
+.delete-icon {
+  position: absolute;
+  top: 90%;
+  &:hover {
+    color: #920000;
+  }
+  &:active {
+    color: #660101;
+  }
+}
