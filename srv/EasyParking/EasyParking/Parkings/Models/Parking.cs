@@ -24,7 +24,8 @@ namespace EasyParking.Parkings.Models
         public ParkingMap()
         {
             Map(x => x.Name)
-                .Not.Nullable();
+                .Not.Nullable()
+                .Unique();
             Map(x => x.Address);
             Map(x => x.PricePerHour);
             Map(x => x.ParkingLayoutImageData)

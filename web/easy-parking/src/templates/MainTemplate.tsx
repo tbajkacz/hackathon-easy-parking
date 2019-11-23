@@ -31,6 +31,11 @@ const MainTemplate: React.FC<MainTemplateProps> = ({ children }) => {
                 <span className="nav-detail"> Reservation</span>
               </NavLink>
             </NavItem>
+            <NavItem className="nav-item item-color">
+              <NavLink to={routes.addParking} className="nav-link">
+                <span className="nav-detail">Add parking lot</span>
+              </NavLink>
+            </NavItem>
             <NavItem className="nav-item">
               <NavLink to={routes.settings} className="nav-link item-color">
                 <span className="nav-detail">Settings</span>

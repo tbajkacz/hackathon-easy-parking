@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EasyParking.Db.Services;
+using EasyParking.Extensions;
 using EasyParking.Parkings.Dto;
 using EasyParking.Parkings.Models;
 using EasyParking.Parkings.Params;
@@ -47,10 +48,10 @@ namespace EasyParking.Controllers
         [HttpPost]
         public async Task Add(ParkingAddParams param)
         {
+            param.OwnerId = HttpContext.User.GetId();
             var parking = mapper.Map<ParkingAddParams, Parking>(param);
             await parkingRepository.AddAsync(parking);
             await uow.CommitAsync();
         }
-
     }
 }

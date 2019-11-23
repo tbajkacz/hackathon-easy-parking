@@ -3,5 +3,6 @@ export const routes = {
   register: "/register",
   reservation: "/",
   selectParkingSpot: "/:parkingId",
-  settings: "/settings"
+  settings: "/settings",
+  addParking: "/addParking"
 };
