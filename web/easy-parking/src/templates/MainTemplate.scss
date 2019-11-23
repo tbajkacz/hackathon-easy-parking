@@ -24,3 +24,10 @@
 .nav-detail {
   color: #ffffffcc;
 }
+
+.name-app {
+  &:hover {
+    color: white;
+    text-decoration: none;
+  }
+}

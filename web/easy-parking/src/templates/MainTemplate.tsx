@@ -20,7 +20,7 @@ const MainTemplate: React.FC<MainTemplateProps> = ({ children }) => {
   return (
     <>
       <Navbar color="faded" light className="nav-wrapper">
-        <NavLink to={routes.reservation} className="mr-auto item-color">
+        <NavLink to={routes.reservation} className="mr-auto item-color name-app">
           Easy Parking
         </NavLink>
         <NavbarToggler onClick={toggleNavbar} className="mr-2" />
