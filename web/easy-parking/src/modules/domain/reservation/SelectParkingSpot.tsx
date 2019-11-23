@@ -24,8 +24,15 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
     };
     fetchParkingById();
   }, []);
+
+  const [selectSpot, setSelectSpot] = useState<number>(1);
   console.log(selectParking);
 
+  const handleChangeSelectSpot = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value;
+    const valueNum = Number(value);
+    setSelectSpot(valueNum);
+  };
   return (
     <MainTemplate>
       <LoadingIndicator promise={promise}>
@@ -34,6 +41,17 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
             <span className="title-parking-list">{`${selectParking.result.name}, ${selectParking.result.address}`}</span>
           )}
           <img src={selectParkingImage} alt="autos" className="selectParkingImage" />
+          <div className="form-group">
+            <label htmlFor="exampleFormControlSelect1">Select parking spot:</label>
+            <select
+              value={selectSpot}
+              onChange={e => handleChangeSelectSpot(e)}
+              className="form-control select-parking-spot"
+              id="exampleFormControlSelect1"
+            >
+              {selectParking && selectParking.result.parkingSpots.map(spot => <option>{spot.spotNumber}</option>)}
+            </select>
+          </div>
         </>
       </LoadingIndicator>
     </MainTemplate>
