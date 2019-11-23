@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import MainTemplate from "../../../templates/MainTemplate";
 import LoadingIndicator from "../../../utils/LoadingIndicator";
 import reservationService from "./reservationService";
-import { useParams } from "react-router";
+import { useParams, useHistory } from "react-router";
 import { ParkingList, ReserveData } from "./reservationTypes";
 import { ApiResponse } from "../../../common/types";
 import "./SelectParkingSpot.scss";
@@ -11,6 +11,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { setHours, setMinutes } from "date-fns";
 import { FormGroup, Label, Input } from "reactstrap";
 import { formatDate } from "../../../utils/formatDate";
+import { routes } from "../../../routes";
 
 interface SelectParkingSpotProps {}
 
@@ -64,11 +65,20 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
     parkingId: 0,
     spotNumber: 0
   });
+
+  const history = useHistory();
+
+  const [buttonContent, setButtonContent] = useState("Reserve");
   const handleSendReserve = async () => {
-    const promise = reservationService.sendReserve(reserveData);
-    setPromise(promise);
-    const res = await promise;
-    console.log(res);
+    setPromise(
+      reservationService.sendReserve(reserveData).then(
+        () => {
+          setButtonContent("Operation successfull !");
+          setTimeout(() => history.push(routes.viewReservations), 1000);
+        },
+        () => setButtonContent("Error :( try again")
+      )
+    );
   };
   // console.log(startDate, endDate);
   console.log(reserveData, "--reserveData");
@@ -158,7 +168,7 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
             dateFormat="MMMM d, yyyy h:mm aa"
           />
           <button type="button" className="btn btn-primary w-100 mt-2" onClick={() => handleSendReserve()}>
-            Reserve parking
+            {buttonContent}
           </button>
         </>
       </LoadingIndicator>
