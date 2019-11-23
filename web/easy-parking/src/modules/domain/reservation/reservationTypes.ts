@@ -13,6 +13,7 @@ export interface ParkingList {
   pricePerHour: number;
   owner: UserAccountParking;
   parkingSpots: ParkingSpot[];
+  parkingLayoutImageData?: string;
 }
 
 export interface ParkingSpot {

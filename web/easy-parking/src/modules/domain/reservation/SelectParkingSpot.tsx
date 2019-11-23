@@ -40,7 +40,11 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
           {selectParking && (
             <span className="title-parking-list">{`${selectParking.result.name}, ${selectParking.result.address}`}</span>
           )}
-          <img src={selectParkingImage} alt="autos" className="selectParkingImage" />
+          <img
+            src={selectParking ? selectParking.result.parkingLayoutImageData : ""}
+            alt="autos"
+            className="selectParkingImage"
+          />
           <div className="form-group">
             <label htmlFor="exampleFormControlSelect1">Select parking spot:</label>
             <select
