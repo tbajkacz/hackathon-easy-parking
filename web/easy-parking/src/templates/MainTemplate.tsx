@@ -20,10 +20,10 @@ const MainTemplate: React.FC<MainTemplateProps> = ({ children }) => {
   return (
     <>
       <Navbar color="faded" light className="nav-wrapper">
-        <NavLink to={routes.reservation} className="mr-auto item-color">
+        <NavLink to={routes.reservation} className="mr-auto item-color name-app">
           Easy Parking
         </NavLink>
-        <NavbarToggler onClick={toggleNavbar} className="mr-2" />
+        <NavbarToggler onClick={toggleNavbar} className="mr-2" style={{ borderColor: "#ffffff75" }} />
         <Collapse isOpen={!collapsed} navbar>
           <Nav navbar>
             <NavItem className="nav-item item-color">
@@ -39,11 +39,6 @@ const MainTemplate: React.FC<MainTemplateProps> = ({ children }) => {
             <NavItem className="nav-item">
               <NavLink to={routes.viewReservations} className="nav-link item-color">
                 <span className="nav-detail">Your reservations</span>
-              </NavLink>
-            </NavItem>
-            <NavItem className="nav-item">
-              <NavLink to={routes.settings} className="nav-link item-color">
-                <span className="nav-detail">Settings</span>
               </NavLink>
             </NavItem>
             <NavItem className="nav-item">
