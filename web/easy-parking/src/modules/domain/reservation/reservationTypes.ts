@@ -25,8 +25,8 @@ export interface ParkingSpot {
 
 export interface ReservationParking {
   reservedBy: UserAccountParking;
-  reservedFrom: Date;
-  reservedUntil: Date;
+  fromUtc: string;
+  untilUtc: string;
 }
 
 export interface ReserveData {
