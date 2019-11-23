@@ -28,3 +28,10 @@ export interface ReservationParking {
   reservedFrom: Date;
   reservedUntil: Date;
 }
+
+export interface ReserveData {
+  from: string;
+  to: string;
+  parkingId: number;
+  spotNumber: number;
+}
