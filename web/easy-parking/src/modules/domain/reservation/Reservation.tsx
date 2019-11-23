@@ -42,7 +42,7 @@ const Reservation: React.FC<ReservationProps> = props => {
                 return (
                   <li
                     key={parking.id}
-                    className="list-group-item parking-list-li"
+                    className="list-group-item parking-list-li d-flex"
                     onClick={() => handleSelectParking(parking)}
                   >
                     <span className="parking-list-data">{`${parking.name} ${parking.address}`}</span>

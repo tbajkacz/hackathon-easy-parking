@@ -1,12 +1,12 @@
 @import "../../../common/columnDisplay.scss";
 
 .wrap-parking-list {
-  @extend .md-display;
+  // @extend .md-display;
   width: 100%;
 }
 
 .title-parking-list {
-  @extend .md-display;
+  // @extend .md-display;
   display: inline-block;
   padding: 10px;
   width: 100%;
@@ -15,7 +15,7 @@
 }
 
 .parking-list-li {
-  @extend .md-display;
+  // @extend .md-display;
   width: 100%;
   text-align: left;
   display: flex;
@@ -28,7 +28,7 @@
 }
 
 .parking-list-amount-parking-spot {
-  @extend .float-right;
+  // @extend .float-right;
   align-self: center;
   justify-self: flex-end;
 }
