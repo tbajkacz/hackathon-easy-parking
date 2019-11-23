@@ -9,6 +9,7 @@ import Reservation from "./modules/domain/reservation/Reservation";
 import SettingsPanel from "./modules/domain/settingsPanel/SettingsPanel";
 import SelectParkingSpot from "./modules/domain/reservation/SelectParkingSpot";
 import AddParkingLot from "./modules/domain/parkings/AddParkingLot";
+import UserReservationList from "./modules/domain/userReservations/UserReservationList";
 
 const App: React.FC = () => {
   return (
@@ -19,6 +20,7 @@ const App: React.FC = () => {
           <Route exact path={routes.register} component={SignUp} />
           <Route exact path={routes.reservation} component={Reservation} />
           <Route exact path={routes.settings} component={SettingsPanel} />
+          <Route exact path={routes.viewReservations} component={UserReservationList} />
           <Route exact path={routes.addParking} component={AddParkingLot} />
           <Route exact path={routes.selectParkingSpot} component={SelectParkingSpot} />
           {/* <Redirect to={routes.login} /> */}
