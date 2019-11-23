@@ -14,6 +14,7 @@ export interface ParkingList {
   owner: UserAccountParking;
   parkingSpots: ParkingSpot[];
   parkingLayoutImageData?: string;
+  availableSpots: string;
 }
 
 export interface ParkingSpot {
@@ -24,6 +25,13 @@ export interface ParkingSpot {
 
 export interface ReservationParking {
   reservedBy: UserAccountParking;
-  reservedFrom: Date;
-  reservedUntil: Date;
+  fromUtc: string;
+  untilUtc: string;
+}
+
+export interface ReserveData {
+  from: string;
+  to: string;
+  parkingId: number;
+  spotNumber: number;
 }
