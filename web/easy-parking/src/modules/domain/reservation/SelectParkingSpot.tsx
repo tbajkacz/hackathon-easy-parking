@@ -152,6 +152,7 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
               onChange={e => {
                 const selectParkingId = selectParking ? selectParking.result.id : 0;
                 handleChangeSelectSpot(e, selectParkingId);
+                updateTimeExcludes();
               }}
             >
               <option value="0">Select parking spot</option>
@@ -168,6 +169,7 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
             onChange={date => handleDatePicker(date, "from")}
             showTimeSelect
             dateFormat="MMMM d, yyyy h:mm aa"
+            excludeTimes={dayBasedExcludeCollection}
           />
 
           <div className="pl-3">To</div>
@@ -178,6 +180,7 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
             onChange={date => handleDatePicker(date, "to")}
             showTimeSelect
             dateFormat="MMMM d, yyyy h:mm aa"
+            excludeTimes={dayBasedExcludeCollection}
           />
 
           <Input
@@ -194,7 +197,7 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
             onClick={() => handleSendReserve()}
             disabled={selectSpot === 0 || vehicleRegistration === "" ? true : false}
           >
-            Reserve parking
+            {buttonContent}
           </button>
         </>
       </LoadingIndicator>
