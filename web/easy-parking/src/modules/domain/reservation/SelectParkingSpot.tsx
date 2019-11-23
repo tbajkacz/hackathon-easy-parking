@@ -82,7 +82,7 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
           )}
           <img
             src={selectParking ? selectParking.result.parkingLayoutImageData : ""}
-            alt="autos"
+            alt="place parking"
             className="selectParkingImage"
           />
           <FormGroup>
