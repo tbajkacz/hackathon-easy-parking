@@ -15,6 +15,11 @@ import { routes } from "../../../routes";
 
 interface SelectParkingSpotProps {}
 
+interface SpotExclude {
+  spotNumber: number;
+  exclude: Date;
+}
+
 const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
   const { parkingId } = useParams();
   const [promise, setPromise] = useState<Promise<any> | undefined>(undefined);
@@ -43,7 +48,12 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
   };
 
   const handleDatePicker = (date: Date | null, name: string) => {
-    handleExcludeDate();
+    if (date) {
+      let filtered = timeExcludeCollection.filter(
+        e => e.exclude.getDate() === date.getDate() && e.spotNumber === selectSpot
+      );
+      setDayBasedExcludeCollection(filtered.map(c => c.exclude));
+    }
     const dateFormatting = date ? date.toISOString() : "";
     setReserveData({
       ...reserveData,
@@ -80,29 +90,32 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
       )
     );
   };
-  // console.log(startDate, endDate);
-  console.log(reserveData, "--reserveData");
-  ///////////////
 
-  const handleExcludeDate = () => {
-    const mapSelectSpot =
-      selectParking &&
-      selectParking.result.parkingSpots.map(spot =>
-        spot.reservations.map(reservation => {
-          return { from: reservation.fromUtc, to: reservation.untilUtc };
-        })
+  const [timeExcludeCollection, setTimeExcludeCollection] = useState<SpotExclude[]>([]);
+  const [dayBasedExcludeCollection, setDayBasedExcludeCollection] = useState<Date[]>();
+
+  const updateTimeExcludes = () => {
+    if (selectParking) {
+      let excludeCollection: SpotExclude[] = [];
+      console.log(
+        selectParking.result.parkingSpots
+          .map(p => ({ reservations: p.reservations, spotNumber: p.spotNumber }))
+          .filter(r => r.reservations.length !== 0)
+          .flatMap(o =>
+            o.reservations.map(r => ({ untilUtc: r.untilUtc, fromUtc: r.fromUtc, spotNumber: o.spotNumber }))
+          )
+          .forEach(r => {
+            let startingDate = new Date(r.fromUtc);
+            let endingDate = new Date(r.untilUtc);
+            endingDate.setMinutes(endingDate.getMinutes() - 1);
+            do {
+              excludeCollection.push({ spotNumber: r.spotNumber, exclude: new Date(startingDate.toISOString()) });
+              startingDate.setMinutes(startingDate.getMinutes() + 30);
+            } while (startingDate < endingDate);
+          })
       );
-    const flatSelectSpot = mapSelectSpot && mapSelectSpot.flat(1);
-
-    // const flatSelectSpotFrom =
-    //   mapSelectSpot &&
-    //   mapSelectSpot.flat(1).map(x => {
-    //     return new Date(x.from);
-    //   });
-    // const flatSelectSpotTo = mapSelectSpot && mapSelectSpot.flat(1).map(x => new Date(x.to));
-
-    // const excludeData = flatSelectSpotFrom && flatSelectSpotTo && [...flatSelectSpotFrom, ...flatSelectSpotTo];
-    console.log(flatSelectSpot, "flat");
+      setTimeExcludeCollection(excludeCollection);
+    }
   };
 
   return (
@@ -141,14 +154,6 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
             name="from"
             onChange={date => handleDatePicker(date, "from")}
             showTimeSelect
-            // excludeTimes={[
-
-            // setHours(setMinutes(new Date(), 0), 17),
-            // setHours(setMinutes(new Date(), 30), 18),
-            // setHours(setMinutes(new Date(), 30), 19),
-            // setHours(setMinutes(new Date(), 30), 17)
-            // ]}
-            // excludeTimes={excludeData}
             dateFormat="MMMM d, yyyy h:mm aa"
           />
 
@@ -159,12 +164,6 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
             name="to"
             onChange={date => handleDatePicker(date, "to")}
             showTimeSelect
-            excludeTimes={[
-              setHours(setMinutes(new Date(), 0), 17),
-              setHours(setMinutes(new Date(), 30), 18),
-              setHours(setMinutes(new Date(), 30), 19),
-              setHours(setMinutes(new Date(), 30), 17)
-            ]}
             dateFormat="MMMM d, yyyy h:mm aa"
           />
           <button type="button" className="btn btn-primary w-100 mt-2" onClick={() => handleSendReserve()}>
