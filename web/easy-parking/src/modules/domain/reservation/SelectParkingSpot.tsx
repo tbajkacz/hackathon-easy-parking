@@ -36,7 +36,7 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
   return (
     <MainTemplate>
       <LoadingIndicator promise={promise}>
-        <>
+        <div className="wrap-parking-list">
           {selectParking && (
             <span className="title-parking-list">{`${selectParking.result.name}, ${selectParking.result.address}`}</span>
           )}
@@ -45,18 +45,20 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
             alt="autos"
             className="selectParkingImage"
           />
-          <div className="form-group">
-            <label htmlFor="exampleFormControlSelect1">Select parking spot:</label>
-            <select
-              value={selectSpot}
-              onChange={e => handleChangeSelectSpot(e)}
-              className="form-control select-parking-spot"
-              id="exampleFormControlSelect1"
-            >
-              {selectParking && selectParking.result.parkingSpots.map(spot => <option>{spot.spotNumber}</option>)}
-            </select>
+          <div className="col-sm-10 col-md-6 offset-md-3">
+            <div className="form-group">
+              <label htmlFor="exampleFormControlSelect1">Select parking spot:</label>
+              <select
+                value={selectSpot}
+                onChange={e => handleChangeSelectSpot(e)}
+                className="form-control select-parking-spot"
+                id="exampleFormControlSelect1"
+              >
+                {selectParking && selectParking.result.parkingSpots.map(spot => <option>{spot.spotNumber}</option>)}
+              </select>
+            </div>
           </div>
-        </>
+        </div>
       </LoadingIndicator>
     </MainTemplate>
   );

@@ -1,4 +1,7 @@
+@import "../../../common/columnDisplay.scss";
+
 .selectParkingImage {
+  @extend .md-image;
   width: 100%;
 }
 
