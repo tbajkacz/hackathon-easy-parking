@@ -33,8 +33,7 @@ namespace EasyParking.Parkings.Models
         {
             References(x => x.ReservedBy)
                 .Not.Nullable();
-            Map(x => x.VehicleRegistrationNumber)
-                .Not.Nullable();
+            Map(x => x.VehicleRegistrationNumber);
             Map(x => x.ReservedFrom);
             Map(x => x.ReservedUntil);
             References(x => x.ReservedSpot);
