@@ -40,6 +40,7 @@ const AddParkingLot: React.FC<AddParkingLotProps> = props => {
 
   return (
     <MainTemplate>
+      <span className="title-parking-list">Add Parking:</span>
       <form className="col-sm-12 col-md-4 offset-md-4 mt-2">
         <div className="form-group">
           <input
