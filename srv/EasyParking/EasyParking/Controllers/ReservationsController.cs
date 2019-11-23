@@ -32,9 +32,10 @@ namespace EasyParking.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<ReservationDto> GetReservations()
+        public IEnumerable<ReservationDto> GetUserReservations()
         {
             return reservationRepository.GetAll()
+                .Where(r => r.ReservedBy.Id == HttpContext.User.GetId())
                 .Select(r => mapper.Map<Reservation, ReservationDto>(r));
         }
 
