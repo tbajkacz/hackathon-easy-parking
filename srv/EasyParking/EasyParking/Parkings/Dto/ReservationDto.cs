@@ -7,6 +7,8 @@ namespace EasyParking.Parkings.Dto
     {
         public int Id { get; set; }
 
+        public string VehicleRegistrationNumber { get; set; }
+
         public UserAccountParkingDto ReservedBy { get; set; }
 
         public DateTime FromUtc { get; set; }

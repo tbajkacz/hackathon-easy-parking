@@ -6,6 +6,8 @@ namespace EasyParking.Parkings.Params
     {
         public int ParkingId { get; set; }
 
+        public string VehicleRegistrationNumber { get; set; }
+
         public int SpotNumber { get; set; }
 
         public DateTime From { get; set; }
