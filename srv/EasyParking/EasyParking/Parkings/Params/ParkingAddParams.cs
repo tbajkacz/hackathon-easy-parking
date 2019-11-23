@@ -11,5 +11,7 @@
         public int OwnerId { get; set; }
 
         public int ParkingSpotsAmount { get; set; }
+
+        public string ParkingLayoutImageData { get; set; }
     }
 }

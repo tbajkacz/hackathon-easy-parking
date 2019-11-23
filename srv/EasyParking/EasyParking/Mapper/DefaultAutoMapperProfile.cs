@@ -19,7 +19,8 @@ namespace EasyParking.Mapper
             CreateMap<RegisterParams, UserAccount>()
                 .ForMember(u => u.PasswordHash, mce => mce.MapFrom<RegisterParamsPasswordHashResolver>());
 
-            CreateMap<Parking, ParkingDto>();
+            CreateMap<Parking, ParkingGetAllDto>();
+            CreateMap<Parking, ParkingGetByIdDto>();
             CreateMap<ParkingAddParams, Parking>()
                 .ForMember(p => p.Owner, mce => mce.MapFrom<ParkingAddOwnerResolver>())
                 .ForMember(p => p.ParkingSpots, mce => mce.MapFrom<ParkingAddSpotsResolver>());

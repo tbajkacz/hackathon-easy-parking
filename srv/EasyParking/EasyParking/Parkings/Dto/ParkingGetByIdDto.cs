@@ -1,10 +1,13 @@
-﻿using EasyParking.Parkings.Models;
-using EasyParking.Users.Dto;
+﻿using EasyParking.Users.Dto;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace EasyParking.Parkings.Dto
 {
-    public class ParkingDto
+    public class ParkingGetByIdDto
     {
         public int Id { get; set; }
 
@@ -15,6 +18,8 @@ namespace EasyParking.Parkings.Dto
         public long PricePerHour { get; set; }
 
         public UserAccountParkingDto Owner { get; set; }
+
+        public string ParkingLayoutImageData { get; set; }
 
         public IList<ParkingSpotDto> ParkingSpots { get; set; }
     }

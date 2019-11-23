@@ -32,16 +32,16 @@ namespace EasyParking.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<ParkingDto> GetAll()
+        public IEnumerable<ParkingGetAllDto> GetAll()
         {
             return parkingRepository.GetAll()
-                .Select(p => mapper.Map<Parking, ParkingDto>(p));
+                .Select(p => mapper.Map<Parking, ParkingGetAllDto>(p));
         }
 
         [HttpGet]
-        public async Task<ParkingDto> GetById(int id)
+        public async Task<ParkingGetByIdDto> GetById(int id)
         {
-            return mapper.Map<Parking, ParkingDto>(await parkingRepository.GetByIdAsync(id));
+            return mapper.Map<Parking, ParkingGetByIdDto>(await parkingRepository.GetByIdAsync(id));
         }
 
         [HttpPost]

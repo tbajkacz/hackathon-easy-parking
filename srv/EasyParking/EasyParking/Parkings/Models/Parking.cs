@@ -12,6 +12,8 @@ namespace EasyParking.Parkings.Models
 
         public virtual long PricePerHour { get; set; }
 
+        public virtual string ParkingLayoutImageData { get; set; }
+
         public virtual UserAccount Owner { get; set; }
 
         public virtual IList<ParkingSpot> ParkingSpots { get; set; }
@@ -25,6 +27,8 @@ namespace EasyParking.Parkings.Models
                 .Not.Nullable();
             Map(x => x.Address);
             Map(x => x.PricePerHour);
+            Map(x => x.ParkingLayoutImageData)
+                .CustomType("StringClob");
             References(x => x.Owner)
                 .Not.Nullable();
             HasMany(x => x.ParkingSpots)
