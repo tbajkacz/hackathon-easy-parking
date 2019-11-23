@@ -39,7 +39,7 @@ const UserReservationList: React.FC<UserReservationListProps> = props => {
                 return (
                   <li key={reservation.id} className="list-group-item parking-list-li">
                     <div className="d-flex">
-                      <div>
+                      <div className="w-100">
                         <h5 className="text-center">
                           {"Parking " +
                             reservation.reservedSpot.parking.name +

@@ -47,7 +47,7 @@ const Reservation: React.FC<ReservationProps> = props => {
                   >
                     <span className="parking-list-data">{`${parking.name} ${parking.address}`}</span>
                     <span className="badge badge-primary badge-pill parking-list-amount-parking-spot">
-                      {parking.availableSpots}
+                      {`${parking.availableSpots} available spot${parking.availableSpots === "1" ? "" : "s"}`}
                     </span>
                   </li>
                 );

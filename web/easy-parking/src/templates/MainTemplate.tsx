@@ -55,7 +55,7 @@ const MainTemplate: React.FC<MainTemplateProps> = ({ children }) => {
         </Collapse>
       </Navbar>
 
-      <div className="d-flex">{children}</div>
+      <div>{children}</div>
     </>
   );
 };
