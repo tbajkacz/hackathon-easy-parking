@@ -3,6 +3,8 @@ import { AddParkingLotData } from "./parkingsTypes";
 import { imageUtility } from "../../../common/imageUtility";
 import MainTemplate from "../../../templates/MainTemplate";
 import { parkingService } from "./parkingService";
+import { useHistory } from "react-router";
+import { routes } from "../../../routes";
 
 interface AddParkingLotProps {}
 
@@ -16,6 +18,8 @@ const defaultParkingLotValues: AddParkingLotData = {
 
 const AddParkingLot: React.FC<AddParkingLotProps> = props => {
   const [addParkingLotData, setAddParkingLotData] = useState(defaultParkingLotValues);
+  const [buttonContent, setButtonContent] = useState("Add");
+  const history = useHistory();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAddParkingLotData({
@@ -35,7 +39,13 @@ const AddParkingLot: React.FC<AddParkingLotProps> = props => {
 
   const onFormSubmit = (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    parkingService.Add(addParkingLotData);
+    parkingService.Add(addParkingLotData).then(
+      () => {
+        setButtonContent("Operation successfull !");
+        setTimeout(() => history.push(routes.reservation), 1000);
+      },
+      () => setButtonContent("Error :( try again")
+    );
   };
 
   return (
@@ -93,7 +103,7 @@ const AddParkingLot: React.FC<AddParkingLotProps> = props => {
           />
         </div>
         <button className="btn btn-primary btn-block" onClick={onFormSubmit}>
-          Add
+          {buttonContent}
         </button>
       </form>
     </MainTemplate>
