@@ -8,6 +8,8 @@ namespace EasyParking.Parkings.Models
     {
         public virtual UserAccount ReservedBy { get; set; }
 
+        public virtual string VehicleRegistrationNumber { get; set; }
+
         /// <summary>
         /// May provide incorrect hour due to db conversions use <see cref="FromUtc"/> instead
         /// </summary>
@@ -31,6 +33,7 @@ namespace EasyParking.Parkings.Models
         {
             References(x => x.ReservedBy)
                 .Not.Nullable();
+            Map(x => x.VehicleRegistrationNumber);
             Map(x => x.ReservedFrom);
             Map(x => x.ReservedUntil);
             References(x => x.ReservedSpot);

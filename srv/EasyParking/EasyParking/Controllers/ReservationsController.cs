@@ -46,6 +46,13 @@ namespace EasyParking.Controllers
             await uow.CommitAsync();
         }
 
+        [HttpPost]
+        public async Task CancelReservation(ReservationCancelParams param)
+        {
+            await reservationRepository.CancelReservationAsync(param.ReservationId, HttpContext.User.GetId());
+            await uow.CommitAsync();
+        }
+
         [HttpGet]
         public async Task<IsAvailableDto> IsAvailableDuring([FromQuery]IsAvailableParams param)
         {

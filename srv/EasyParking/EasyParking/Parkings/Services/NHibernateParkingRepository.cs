@@ -45,6 +45,7 @@ namespace EasyParking.Parkings.Services
                 ReservedBy = await userRepository.GetByIdAsync(userId),
                 ReservedFrom = param.From.ToUniversalTime(),
                 ReservedUntil = param.To.ToUniversalTime(),
+                VehicleRegistrationNumber = param.VehicleRegistrationNumber
             };
             await reservationRepository.AddAsync(reservation);
             
