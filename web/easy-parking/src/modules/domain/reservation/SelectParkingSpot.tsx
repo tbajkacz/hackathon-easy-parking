@@ -80,8 +80,12 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
   const [startDate, setStartDate] = useState<Date | null>(roundedDate(30));
   const [endDate, setEndDate] = useState<Date | null>(roundedDataPlusHalfHour());
   const [reserveData, setReserveData] = useState<ReserveData>({
-    from: roundedDate(30).toString(),
-    to: roundedDataPlusHalfHour().toString(),
+    from: roundedDate(30)
+      .toISOString()
+      .toString(),
+    to: roundedDataPlusHalfHour()
+      .toISOString()
+      .toString(),
     parkingId: 0,
     spotNumber: 0,
     vehicleRegistrationNumber: ""
