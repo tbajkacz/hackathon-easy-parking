@@ -27,6 +27,7 @@ const Reservation: React.FC<ReservationProps> = props => {
   const handleSelectParking = (parking: ParkingList) => {
     history.push(`${routes.reservation}${parking.id}`);
   };
+  console.log(parkingList);
 
   return (
     <MainTemplate>
@@ -46,7 +47,7 @@ const Reservation: React.FC<ReservationProps> = props => {
                   >
                     <span className="parking-list-data">{`${parking.name} ${parking.address}`}</span>
                     <span className="badge badge-primary badge-pill parking-list-amount-parking-spot">
-                      {amountParkingSpots}
+                      {parking.availableSpots}
                     </span>
                   </li>
                 );

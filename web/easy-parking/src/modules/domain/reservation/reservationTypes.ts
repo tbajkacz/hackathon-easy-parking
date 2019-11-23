@@ -14,6 +14,7 @@ export interface ParkingList {
   owner: UserAccountParking;
   parkingSpots: ParkingSpot[];
   parkingLayoutImageData?: string;
+  availableSpots: string;
 }
 
 export interface ParkingSpot {
