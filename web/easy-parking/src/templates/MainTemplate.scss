@@ -31,3 +31,7 @@
     text-decoration: none;
   }
 }
+
+.navbar-toggler-icon {
+  filter: invert(100%) sepia(100%) saturate(21%) hue-rotate(280deg) brightness(106%) contrast(106%);
+}
