@@ -42,11 +42,6 @@ const MainTemplate: React.FC<MainTemplateProps> = ({ children }) => {
               </NavLink>
             </NavItem>
             <NavItem className="nav-item">
-              <NavLink to={routes.settings} className="nav-link item-color">
-                <span className="nav-detail">Settings</span>
-              </NavLink>
-            </NavItem>
-            <NavItem className="nav-item">
               <NavLink to={routes.login} className="nav-link item-color" onClick={() => handleSignOut()}>
                 <span className="nav-detail">Sign Out</span>
               </NavLink>
