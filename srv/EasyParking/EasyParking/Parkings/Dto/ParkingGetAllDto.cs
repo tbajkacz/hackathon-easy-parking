@@ -1,6 +1,9 @@
-﻿using EasyParking.Parkings.Models;
+﻿using EasyParking.Extensions;
+using EasyParking.Parkings.Models;
 using EasyParking.Users.Dto;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace EasyParking.Parkings.Dto
 {
@@ -17,5 +20,9 @@ namespace EasyParking.Parkings.Dto
         public UserAccountParkingDto Owner { get; set; }
 
         public IList<ParkingSpotDto> ParkingSpots { get; set; }
+
+        public int AvailableSpots
+            => ParkingSpots.Where(s => s.IsAvailableDuring(DateTime.Now, DateTime.Now.AddHours(1)))
+                           .Count();
     }
 }
