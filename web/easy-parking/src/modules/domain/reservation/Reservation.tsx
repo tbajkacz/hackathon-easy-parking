@@ -45,7 +45,10 @@ const Reservation: React.FC<ReservationProps> = props => {
                     className="list-group-item parking-list-li d-flex"
                     onClick={() => handleSelectParking(parking)}
                   >
-                    <span className="parking-list-data">{`${parking.name} ${parking.address}`}</span>
+                    <div className="parking-list-data">
+                      <span>{`${parking.name}`}</span>
+                      <span className="parking-list-data-detail">{`${parking.address}`}</span>
+                    </div>
                     <span className="badge badge-primary badge-pill parking-list-amount-parking-spot">
                       {`${parking.availableSpots} available spot${parking.availableSpots === "1" ? "" : "s"}`}
                     </span>

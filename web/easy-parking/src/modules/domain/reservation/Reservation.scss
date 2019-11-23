@@ -29,8 +29,13 @@
 .parking-list-data {
   flex-grow: 1;
   text-align: left;
+  display: flex;
+  flex-direction: column;
 }
 
+.parking-list-data-detail {
+  font-size: 13px;
+}
 .parking-list-amount-parking-spot {
   // @extend .float-right;
   align-self: center;
