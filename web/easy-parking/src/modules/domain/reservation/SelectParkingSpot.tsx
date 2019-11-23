@@ -42,6 +42,7 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
   };
 
   const handleDatePicker = (date: Date | null, name: string) => {
+    handleExcludeDate();
     const dateFormatting = date ? date.toISOString() : "";
     setReserveData({
       ...reserveData,
@@ -53,7 +54,6 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
       case "to":
         return setEndDate(date);
     }
-    console.log(date, name, "--date");
   };
 
   const [startDate, setStartDate] = useState<Date | null>(setHours(setMinutes(new Date(), 30), 16));
@@ -72,6 +72,28 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
   };
   // console.log(startDate, endDate);
   console.log(reserveData, "--reserveData");
+  ///////////////
+
+  const handleExcludeDate = () => {
+    const mapSelectSpot =
+      selectParking &&
+      selectParking.result.parkingSpots.map(spot =>
+        spot.reservations.map(reservation => {
+          return { from: reservation.fromUtc, to: reservation.untilUtc };
+        })
+      );
+    const flatSelectSpot = mapSelectSpot && mapSelectSpot.flat(1);
+
+    // const flatSelectSpotFrom =
+    //   mapSelectSpot &&
+    //   mapSelectSpot.flat(1).map(x => {
+    //     return new Date(x.from);
+    //   });
+    // const flatSelectSpotTo = mapSelectSpot && mapSelectSpot.flat(1).map(x => new Date(x.to));
+
+    // const excludeData = flatSelectSpotFrom && flatSelectSpotTo && [...flatSelectSpotFrom, ...flatSelectSpotTo];
+    console.log(flatSelectSpot, "flat");
+  };
 
   return (
     <MainTemplate>
@@ -109,12 +131,14 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
             name="from"
             onChange={date => handleDatePicker(date, "from")}
             showTimeSelect
-            excludeTimes={[
-              setHours(setMinutes(new Date(), 0), 17),
-              setHours(setMinutes(new Date(), 30), 18),
-              setHours(setMinutes(new Date(), 30), 19),
-              setHours(setMinutes(new Date(), 30), 17)
-            ]}
+            // excludeTimes={[
+
+            // setHours(setMinutes(new Date(), 0), 17),
+            // setHours(setMinutes(new Date(), 30), 18),
+            // setHours(setMinutes(new Date(), 30), 19),
+            // setHours(setMinutes(new Date(), 30), 17)
+            // ]}
+            // excludeTimes={excludeData}
             dateFormat="MMMM d, yyyy h:mm aa"
           />
 
@@ -133,7 +157,7 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
             ]}
             dateFormat="MMMM d, yyyy h:mm aa"
           />
-          <button type="button" className="btn btn-primary w-100" onClick={() => handleSendReserve()}>
+          <button type="button" className="btn btn-primary w-100 mt-2" onClick={() => handleSendReserve()}>
             Reserve parking
           </button>
         </>
