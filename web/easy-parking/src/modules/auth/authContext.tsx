@@ -43,7 +43,7 @@ export function useProvideAuth() {
 
   const signUp = (params?: SignUpCredentials) => {
     let promise = authService.signUp(params).then(r => {
-      signIn({ login: params!.login, password: params!.password, rememberMe: true });
+      if (params) signIn({ login: params.login, password: params.password, rememberMe: true });
     });
     setPromise(promise);
   };
