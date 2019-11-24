@@ -1,0 +1,52 @@
+@import "../../../node_modules/bootstrap";
+
+.container-main {
+  height: 100vh;
+  background-image: url("../../assets/img/bg3.jpg");
+  background-repeat: no-repeat;
+  overflow-y: auto;
+  background-size: cover;
+  background-position: center;
+}
+
+.wrap-form {
+  @extend .col-sm-10;
+  @extend .col-md-4;
+  background-color: rgba(255, 255, 255, 0.849);
+  margin: 80px auto 10px;
+  padding: 25px 50px;
+  min-height: 300px;
+  border-radius: 5px;
+}
+
+.wrap-buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-signIn {
+  width: 100%;
+  margin: 15px 0;
+  align-self: center;
+}
+
+.link-to-sign-up {
+  align-self: center;
+}
+
+.avatar {
+  margin-bottom: 25px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo-signIn {
+  width: 50px;
+  filter: hue-rotate(1390deg);
+}
+
+.logo-subtitle {
+  font-weight: 500;
+}

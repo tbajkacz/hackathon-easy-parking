@@ -1,0 +1,43 @@
+@import "../../../common/columnDisplay.scss";
+
+.wrap-parking-list {
+  // @extend .md-display;
+  width: 100%;
+}
+
+.title-parking-list {
+  // @extend .md-display;
+  display: inline-block;
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+  background-color: #eee;
+}
+
+.parking-list-li {
+  // @extend .md-display;
+  width: 100%;
+  text-align: left;
+  display: flex;
+  justify-content: center;
+
+  &:active {
+    background-color: #b4b4b4;
+  }
+}
+
+.parking-list-data {
+  flex-grow: 1;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.parking-list-data-detail {
+  font-size: 13px;
+}
+.parking-list-amount-parking-spot {
+  // @extend .float-right;
+  align-self: center;
+  justify-self: flex-end;
+}
