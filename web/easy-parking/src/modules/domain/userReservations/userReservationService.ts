@@ -1,7 +1,7 @@
 import { UserReservation } from "./userReservationTypes";
 import { ApiResponse } from "./../../../common/types";
 import axios from "axios";
-import { unwrap } from "../../../common/serviceUtility";
+import { unwrap } from "../../../common/serviceUnwrapUtility";
 
 class UserReservationService {
   Get() {

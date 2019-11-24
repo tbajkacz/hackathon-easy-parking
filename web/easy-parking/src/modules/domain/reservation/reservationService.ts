@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { ApiResponse } from "../../../common/types";
 import { Parking, ReserveData } from "./reservationTypes";
-import { unwrap } from "../../../common/serviceUtility";
+import { unwrap } from "../../../common/serviceUnwrapUtility";
 import { UserAccount } from "../../auth/authTypes";
 
 const getAllParking = (): Promise<ApiResponse<Parking[]>> => {

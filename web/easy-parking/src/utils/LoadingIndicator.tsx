@@ -24,9 +24,14 @@ export default function LoadingIndicator(props: LoadingIndicatorProps) {
   };
 
   if (props.promise) {
-    props.promise.then(() => {
-      setIsCompleted(true);
-    });
+    props.promise.then(
+      () => {
+        setIsCompleted(true);
+      },
+      () => {
+        setIsCompleted(true);
+      }
+    );
     return <div style={{ width: "100%" }}>{isCompleted ? props.children : renderLoadingIndicator()}</div>;
   }
   return <div>{props.children}</div>;

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { AddParkingLotData } from "./parkingsTypes";
 import { imageUtility } from "../../../common/imageUtility";
 import MainTemplate from "../../../templates/MainTemplate";
-import { parkingService } from "./parkingService";
+import parkingService from "./parkingService";
 import { useHistory } from "react-router";
 import { routes } from "../../../routes";
 import SectionName from "../../../common/SectionName";
@@ -40,7 +40,7 @@ const AddParkingLot: React.FC<AddParkingLotProps> = props => {
 
   const onFormSubmit = (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    parkingService.Add(addParkingLotData).then(
+    parkingService.add(addParkingLotData).then(
       () => {
         setButtonContent("Operation successfull !");
         setTimeout(() => history.push(routes.reservation), 1000);
