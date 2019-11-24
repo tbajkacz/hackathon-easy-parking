@@ -3,7 +3,7 @@ import MainTemplate from "../../../templates/MainTemplate";
 import LoadingIndicator from "../../../utils/LoadingIndicator";
 import reservationService from "./reservationService";
 import { useParams, useHistory } from "react-router";
-import { ParkingList, ReserveData } from "./reservationTypes";
+import { Parking, ReserveData } from "./reservationTypes";
 import { ApiResponse } from "../../../common/types";
 import "./SelectParkingSpot.scss";
 import DatePicker from "react-datepicker";
@@ -25,7 +25,7 @@ interface SpotExclude {
 const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
   const { parkingId } = useParams();
   const [promise, setPromise] = useState<Promise<any> | undefined>(undefined);
-  const [selectParking, setSelectParking] = useState<ApiResponse<ParkingList>>();
+  const [selectParking, setSelectParking] = useState<ApiResponse<Parking>>();
   useEffect(() => {
     const fetchParkingById = async () => {
       const id = Number(parkingId);

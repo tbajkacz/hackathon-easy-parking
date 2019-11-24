@@ -3,7 +3,7 @@ import MainTemplate from "../../../templates/MainTemplate";
 import "./Reservation.scss";
 import reservationService from "./reservationService";
 import { ApiResponse } from "../../../common/types";
-import { ParkingList } from "./reservationTypes";
+import { Parking } from "./reservationTypes";
 import LoadingIndicator from "../../../utils/LoadingIndicator";
 import { useHistory } from "react-router";
 import { routes } from "../../../routes";
@@ -12,7 +12,7 @@ interface ReservationProps {}
 
 const Reservation: React.FC<ReservationProps> = props => {
   const [promise, setPromise] = useState<Promise<any> | undefined>(undefined);
-  const [parkingList, setParkingList] = useState<ApiResponse<ParkingList[]>>();
+  const [parkingList, setParkingList] = useState<ApiResponse<Parking[]>>();
   const history = useHistory();
   useEffect(() => {
     const fetchParkingList = async () => {
@@ -24,7 +24,7 @@ const Reservation: React.FC<ReservationProps> = props => {
     fetchParkingList();
   }, []);
 
-  const handleSelectParking = (parking: ParkingList) => {
+  const handleSelectParking = (parking: Parking) => {
     history.push(`${routes.reservation}${parking.id}`);
   };
   console.log(parkingList);

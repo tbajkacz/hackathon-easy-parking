@@ -6,7 +6,7 @@ export interface UserAccountParking {
   login: string;
 }
 
-export interface ParkingList {
+export interface Parking {
   id: number;
   name: string;
   address: string;

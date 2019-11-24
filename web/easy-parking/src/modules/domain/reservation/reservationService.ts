@@ -1,15 +1,15 @@
 import axios, { AxiosResponse } from "axios";
 import { ApiResponse } from "../../../common/types";
-import { ParkingList, ReserveData } from "./reservationTypes";
+import { Parking, ReserveData } from "./reservationTypes";
 import { unwrap } from "../../../common/serviceUtility";
 import { UserAccount } from "../../auth/authTypes";
 
-const getAllParking = (): Promise<ApiResponse<ParkingList[]>> => {
-  return axios.get<ApiResponse<ParkingList[]>>("parking/GetAll").then(unwrap);
+const getAllParking = (): Promise<ApiResponse<Parking[]>> => {
+  return axios.get<ApiResponse<Parking[]>>("parking/GetAll").then(unwrap);
 };
 
-const getParkingById = (id: number): Promise<AxiosResponse<ApiResponse<ParkingList>>> => {
-  return axios.get<ApiResponse<ParkingList>>("parking/getById", {
+const getParkingById = (id: number): Promise<AxiosResponse<ApiResponse<Parking>>> => {
+  return axios.get<ApiResponse<Parking>>("parking/getById", {
     params: {
       id
     }
