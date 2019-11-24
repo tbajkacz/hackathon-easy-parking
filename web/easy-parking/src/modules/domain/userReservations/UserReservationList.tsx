@@ -7,6 +7,7 @@ import moment from "moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faCalendarTimes } from "@fortawesome/free-solid-svg-icons";
 import "./UserReservationList.scss";
+import SectionName from "../../../common/SectionName";
 
 interface UserReservationListProps {}
 
@@ -32,7 +33,7 @@ const UserReservationList: React.FC<UserReservationListProps> = props => {
     <MainTemplate>
       <LoadingIndicator promise={loadingPromise}>
         <div className="wrap-parking-list">
-          <span className="title-parking-list">Your reservations:</span>
+          <SectionName>Your reservations:</SectionName>
           <ul className="list-group">
             {userReservationList &&
               userReservationList.map(reservation => {

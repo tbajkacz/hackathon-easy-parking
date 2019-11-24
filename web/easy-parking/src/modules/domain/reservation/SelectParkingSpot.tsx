@@ -14,6 +14,7 @@ import { formatDate } from "../../../utils/formatDate";
 import { roundedDate, roundedDataPlusHalfHour } from "../../../utils/roundedDate";
 import { routes } from "../../../routes";
 import moment from "moment";
+import SectionName from "../../../common/SectionName";
 
 interface SelectParkingSpotProps {}
 
@@ -153,7 +154,7 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
       <LoadingIndicator promise={promise}>
         <>
           {selectParking && (
-            <span className="title-parking-list">{`${selectParking.result.name}, ${selectParking.result.address}`}</span>
+            <SectionName>{`${selectParking.result.name}, ${selectParking.result.address}`}</SectionName>
           )}
           <img
             src={selectParking ? selectParking.result.parkingLayoutImageData : ""}

@@ -7,6 +7,7 @@ import { Parking } from "./reservationTypes";
 import LoadingIndicator from "../../../utils/LoadingIndicator";
 import { useHistory } from "react-router";
 import { routes } from "../../../routes";
+import SectionName from "../../../common/SectionName";
 
 interface ReservationProps {}
 
@@ -27,18 +28,15 @@ const Reservation: React.FC<ReservationProps> = props => {
   const handleSelectParking = (parking: Parking) => {
     history.push(`${routes.reservation}${parking.id}`);
   };
-  console.log(parkingList);
 
   return (
     <MainTemplate>
       <LoadingIndicator promise={promise}>
         <div className="wrap-parking-list">
-          <span className="title-parking-list">Reservation:</span>
+          <SectionName>Reservation:</SectionName>
           <ul className="list-group">
             {parkingList &&
               parkingList.result.map(parking => {
-                const amountParkingSpots = parking.parkingSpots.length;
-
                 return (
                   <li
                     key={parking.id}
@@ -50,7 +48,7 @@ const Reservation: React.FC<ReservationProps> = props => {
                       <span className="parking-list-data-detail">{`${parking.address}`}</span>
                     </div>
                     <span className="badge badge-primary badge-pill parking-list-amount-parking-spot">
-                      {`${parking.availableSpots} available spot${parking.availableSpots === "1" ? "" : "s"}`}
+                      {`${parking.availableSpots} available spots`}
                     </span>
                   </li>
                 );
