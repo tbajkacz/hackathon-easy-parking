@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import { ApiResponse } from "../../../common/types";
 import { Parking, ReserveData } from "./reservationTypes";
 import { unwrap } from "../../../common/serviceUnwrapUtility";
