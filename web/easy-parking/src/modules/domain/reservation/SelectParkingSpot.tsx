@@ -33,7 +33,7 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
       const promise = reservationService.getParkingById(id);
       setPromise(promise);
       const res = await promise;
-      setSelectParking(res.data);
+      setSelectParking(res);
     };
     fetchParkingById();
   }, []);

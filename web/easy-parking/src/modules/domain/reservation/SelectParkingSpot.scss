@@ -1,7 +1,4 @@
-@import "../../../common/columnDisplay.scss";
-
 .selectParkingImage {
-  // @extend .md-image;
   width: 100%;
 }
 
@@ -10,7 +7,6 @@
 }
 
 .date-picker {
-  // width: 100vw;
   width: calc(100vw - 20px);
 }
 
