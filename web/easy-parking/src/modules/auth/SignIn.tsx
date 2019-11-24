@@ -5,7 +5,6 @@ import { routes } from "../../routes";
 import logoSignIn from "../../assets/img/icon-lock.svg";
 import { SignInCredentials } from "./authTypes";
 import { useAuth } from "./authContext";
-import authService from "./authService";
 
 interface SignInProps {}
 

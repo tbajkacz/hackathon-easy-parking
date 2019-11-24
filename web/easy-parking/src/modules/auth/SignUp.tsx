@@ -26,8 +26,6 @@ const SignUp: React.FC<SignUpProps> = props => {
     });
   };
 
-  console.log(signUpData);
-
   const handlePostSignUp = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     signUp(signUpData);
