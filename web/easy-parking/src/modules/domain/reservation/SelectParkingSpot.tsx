@@ -6,13 +6,12 @@ import { useParams, useHistory } from "react-router";
 import { Parking, ReserveData } from "./reservationTypes";
 import { ApiResponse } from "../../../common/types";
 import "./SelectParkingSpot.scss";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import { FormGroup, Input } from "reactstrap";
 import { roundedDate, roundedDataPlusHalfHour } from "../../../utils/roundedDate";
 import { routes } from "../../../routes";
 import SectionName from "../../../common/SectionName";
 import { formatDate } from "../../../utils/formatDate";
+import DatePickerCalendar from "../../../common/DatePickerCalendar";
 
 interface SelectParkingSpotProps {}
 
@@ -56,7 +55,6 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
         e => e.exclude.getDate() === date.getDate() && e.spotNumber === selectSpot
       );
       setDayBasedExcludeCollection(filtered.map(c => c.exclude));
-
       const dateFormatting = date.toISOString();
       setReserveData({
         ...reserveData,
@@ -178,30 +176,17 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
             </FormGroup>
 
             <div className="pl-3">From</div>
-            <DatePicker
-              className="date-picker pl-3 mb-2"
-              selected={startDate}
+            <DatePickerCalendar
+              defaultDate={startDate}
               name="from"
-              onChange={date => handleDatePicker(date, "from")}
-              onInputClick={() => {
-                handleDatePicker(startDate, "from");
-              }}
-              showTimeSelect
-              dateFormat="MMMM d, yyyy h:mm aa"
+              handleDatePicker={handleDatePicker}
               excludeTimes={dayBasedExcludeCollection}
             />
-
             <div className="pl-3">To</div>
-            <DatePicker
-              className="date-picker pl-3 mb-2"
-              selected={endDate}
+            <DatePickerCalendar
+              defaultDate={endDate}
               name="to"
-              onChange={date => handleDatePicker(date, "to")}
-              onInputClick={() => {
-                handleDatePicker(endDate, "to");
-              }}
-              showTimeSelect
-              dateFormat="MMMM d, yyyy h:mm aa"
+              handleDatePicker={handleDatePicker}
               excludeTimes={dayBasedExcludeCollection}
             />
 
