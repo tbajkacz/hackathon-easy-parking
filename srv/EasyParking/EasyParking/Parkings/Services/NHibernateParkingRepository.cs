@@ -39,7 +39,6 @@ namespace EasyParking.Parkings.Services
             {
                 throw new ParkingSpotAlreadyReservedException(param.ParkingId, (await GetByIdAsync(param.ParkingId)).Name, param.SpotNumber);
             }
-            var tt = param.From.ToUniversalTime();
             var reservation = new Reservation
             {
                 ReservedBy = await userRepository.GetByIdAsync(userId),
