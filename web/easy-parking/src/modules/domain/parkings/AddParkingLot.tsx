@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { AddParkingLotData } from "./parkingsTypes";
-import { imageUtility } from "../../../common/imageUtility";
+import imageUtility from "../../../common/imageUtility";
 import MainTemplate from "../../../templates/MainTemplate";
 import parkingService from "./parkingService";
 import { useHistory } from "react-router";
