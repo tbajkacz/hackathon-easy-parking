@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarTimes } from "@fortawesome/free-solid-svg-icons";
 import "./UserReservationList.scss";
 import SectionName from "../../../common/SectionName";
-import { formatDateToDisplay } from "../../../utils/formatDate";
+import { formatDate } from "../../../utils/formatDate";
 
 interface UserReservationListProps {}
 
@@ -44,7 +44,7 @@ const UserReservationList: React.FC<UserReservationListProps> = props => {
                         </h5>
                         <div className="text-center">{"Reservation period:"}</div>
                         <div className="text-center">
-                          {`${formatDateToDisplay(reservation.fromUtc)} - ${formatDateToDisplay(reservation.untilUtc)}`}
+                          {`${formatDate(reservation.fromUtc)} - ${formatDate(reservation.untilUtc)}`}
                         </div>
                       </div>
                       <div className="delete-wrapper">

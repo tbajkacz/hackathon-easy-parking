@@ -8,13 +8,11 @@ import { ApiResponse } from "../../../common/types";
 import "./SelectParkingSpot.scss";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { setHours, setMinutes } from "date-fns";
-import { FormGroup, Label, Input } from "reactstrap";
-import { formatDate } from "../../../utils/formatDate";
+import { FormGroup, Input } from "reactstrap";
 import { roundedDate, roundedDataPlusHalfHour } from "../../../utils/roundedDate";
 import { routes } from "../../../routes";
-import moment from "moment";
 import SectionName from "../../../common/SectionName";
+import { formatDate } from "../../../utils/formatDate";
 
 interface SelectParkingSpotProps {}
 
@@ -27,6 +25,7 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
   const { parkingId } = useParams();
   const [promise, setPromise] = useState<Promise<any> | undefined>(undefined);
   const [selectParking, setSelectParking] = useState<ApiResponse<Parking>>();
+
   useEffect(() => {
     const fetchParkingById = async () => {
       const id = Number(parkingId);
@@ -39,6 +38,7 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
   }, []);
 
   const [selectSpot, setSelectSpot] = useState<number>(0);
+
   const handleChangeSelectSpot = (e: React.ChangeEvent<HTMLInputElement>, parkingId: number) => {
     const value = e.target.value;
     const valueNum = Number(value);
@@ -56,17 +56,18 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
         e => e.exclude.getDate() === date.getDate() && e.spotNumber === selectSpot
       );
       setDayBasedExcludeCollection(filtered.map(c => c.exclude));
-    }
-    const dateFormatting = date ? date.toISOString() : "";
-    setReserveData({
-      ...reserveData,
-      [name]: dateFormatting
-    });
-    switch (name) {
-      case "from":
-        return setStartDate(date);
-      case "to":
-        return setEndDate(date);
+
+      const dateFormatting = date.toISOString();
+      setReserveData({
+        ...reserveData,
+        [name]: dateFormatting
+      });
+      switch (name) {
+        case "from":
+          return setStartDate(date);
+        case "to":
+          return setEndDate(date);
+      }
     }
   };
 
@@ -82,12 +83,8 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
   const [startDate, setStartDate] = useState<Date | null>(roundedDate(30));
   const [endDate, setEndDate] = useState<Date | null>(roundedDataPlusHalfHour());
   const [reserveData, setReserveData] = useState<ReserveData>({
-    from: roundedDate(30)
-      .toISOString()
-      .toString(),
-    to: roundedDataPlusHalfHour()
-      .toISOString()
-      .toString(),
+    from: roundedDate(30).toISOString(),
+    to: roundedDataPlusHalfHour().toISOString(),
     parkingId: 0,
     spotNumber: 0,
     vehicleRegistrationNumber: ""
@@ -134,15 +131,15 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
       setTimeExcludeCollection(excludeCollection);
     }
   };
-  console.log(reserveData);
+  console.log(reserveData, "---reserveData");
 
   const isDisabledByDate = () => {
     if (startDate && endDate && dayBasedExcludeCollection) {
       return (
         dayBasedExcludeCollection.filter(
           c =>
-            moment(c).format("YYYYMMDDHHmm") === moment(startDate).format("YYYYMMDDHHmm") ||
-            moment(c).format("YYYYMMDDHHmm") === moment(endDate).format("YYYYMMDDHHmm")
+            formatDate(c, "YYYYMMDDHHmm") === formatDate(startDate, "YYYYMMDDHHmm") ||
+            formatDate(c, "YYYYMMDDHHmm") === formatDate(endDate, "YYYYMMDDHHmm")
         ).length !== 0
       );
     }
@@ -168,7 +165,6 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
                 name="spotNumber"
                 id="exampleSelect"
                 placeholder="Select spot"
-                // value={selectSpot}
                 onChange={e => {
                   const selectParkingId = selectParking ? selectParking.result.id : 0;
                   handleChangeSelectSpot(e, selectParkingId);
