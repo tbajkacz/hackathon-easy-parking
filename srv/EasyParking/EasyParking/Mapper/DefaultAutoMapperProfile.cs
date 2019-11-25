@@ -21,7 +21,8 @@ namespace EasyParking.Mapper
 
             CreateMap<Parking, ParkingGetAllDto>();
             CreateMap<Parking, ParkingGetByIdDto>();
-            CreateMap<ParkingAddParams, Parking>()
+            CreateMap<ParkingAddParams, ParkingAddWithOwnerParams>();
+            CreateMap<ParkingAddWithOwnerParams, Parking>()
                 .ForMember(p => p.Owner, mce => mce.MapFrom<ParkingAddOwnerResolver>())
                 .ForMember(p => p.ParkingSpots, mce => mce.MapFrom<ParkingAddSpotsResolver>());
             CreateMap<ParkingSpot, ParkingSpotDto>();

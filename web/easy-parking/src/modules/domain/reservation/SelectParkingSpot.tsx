@@ -130,6 +130,8 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
             formatDate(c, "YYYYMMDDHHmm") === formatDate(endDate, "YYYYMMDDHHmm")
         ).length !== 0
       );
+      return dayBasedExcludeCollection.filter(c => startDate <= c && endDate > c).length !== 0;
+
     }
     return false;
   };

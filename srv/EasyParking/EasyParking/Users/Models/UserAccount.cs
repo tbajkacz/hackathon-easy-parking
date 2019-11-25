@@ -15,8 +15,6 @@ namespace EasyParking.Users.Models
 
         public virtual string PasswordHash { get; set; }
 
-        public virtual long Balance { get; set; } = 0;
-
         public virtual IList<string> Roles { get; set; } = new List<string> { };
     }
 
@@ -35,7 +33,6 @@ namespace EasyParking.Users.Models
                 .Unique();
             Map(x => x.PasswordHash)
                 .Not.Nullable();
-            Map(x => x.Balance);
             HasMany(x => x.Roles)
                 .Table("Roles")
                 .Element("Role");

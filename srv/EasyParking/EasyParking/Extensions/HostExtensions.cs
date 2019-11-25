@@ -26,7 +26,6 @@ namespace EasyParking.Extensions
                     Surname = "root",
                     Login = "root",
                     Email = "root@root.com",
-                    Balance = 999999999,
                     PasswordHash = hashService.Hash("root"),
                     Roles = new List<string> { Roles.Admin },
                 });

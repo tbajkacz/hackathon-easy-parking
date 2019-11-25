@@ -6,9 +6,9 @@ using System.Linq;
 
 namespace EasyParking.Mapper.Resolvers
 {
-    public class ParkingAddSpotsResolver : IValueResolver<ParkingAddParams, Parking, IList<ParkingSpot>>
+    public class ParkingAddSpotsResolver : IValueResolver<ParkingAddWithOwnerParams, Parking, IList<ParkingSpot>>
     {
-        public IList<ParkingSpot> Resolve(ParkingAddParams source, Parking destination, IList<ParkingSpot> destMember, ResolutionContext context)
+        public IList<ParkingSpot> Resolve(ParkingAddWithOwnerParams source, Parking destination, IList<ParkingSpot> destMember, ResolutionContext context)
         {
             int index = 1;
             return Enumerable.Range(0, source.ParkingSpotsAmount)

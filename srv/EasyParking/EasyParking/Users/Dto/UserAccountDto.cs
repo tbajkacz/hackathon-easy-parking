@@ -12,8 +12,6 @@ namespace EasyParking.Users.Dto
 
         public string Email { get; set; }
 
-        public long Balance { get; set; }
-
         public string Login { get; set; }
 
         public IList<string> Roles { get; set; }
