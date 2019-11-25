@@ -6,12 +6,13 @@ import { useParams, useHistory } from "react-router";
 import { Parking, ReserveData, SpotExclude } from "./reservationTypes";
 import { ApiResponse } from "../../../common/types";
 import "./SelectParkingSpot.scss";
-import { FormGroup, Input } from "reactstrap";
+import { Input } from "reactstrap";
 import { roundedDate, roundedDataPlusHalfHour } from "../../../utils/roundedDate";
 import { routes } from "../../../routes";
 import SectionName from "../../../common/SectionName";
 import { formatDate } from "../../../utils/formatDate";
 import DatePickerCalendar from "../../../common/DatePickerCalendar";
+import SelectInputParkingSpot from "./SelectInputParkingSpot";
 
 interface SelectParkingSpotProps {}
 
@@ -146,22 +147,11 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
             className="selectParkingImage"
           />
           <div className="wrap-form-parking-spot">
-            <FormGroup className="mt-2">
-              <Input
-                type="select"
-                name="spotNumber"
-                placeholder="Select spot"
-                onChange={e => {
-                  const selectParkingId = selectParking ? selectParking.result.id : 0;
-                  handleChangeSelectSpot(e, selectParkingId);
-                  updateTimeExcludes();
-                }}
-              >
-                <option value="0">Select parking spot</option>
-                {selectParking &&
-                  selectParking.result.parkingSpots.map(spot => <option key={spot.id}>{spot.spotNumber}</option>)}
-              </Input>
-            </FormGroup>
+            <SelectInputParkingSpot
+              selectParking={selectParking}
+              handleChangeSelectSpot={handleChangeSelectSpot}
+              updateTimeExcludes={updateTimeExcludes}
+            />
             <div className="pl-3">From</div>
             <DatePickerCalendar
               defaultDate={startDate}
