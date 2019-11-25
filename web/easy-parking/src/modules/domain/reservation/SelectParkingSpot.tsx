@@ -137,13 +137,7 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
 
   const isDisabledByDate = () => {
     if (startDate && endDate && dayBasedExcludeCollection) {
-      return (
-        dayBasedExcludeCollection.filter(
-          c =>
-            moment(c).format("YYYYMMDDHHmm") === moment(startDate).format("YYYYMMDDHHmm") ||
-            moment(c).format("YYYYMMDDHHmm") === moment(endDate).format("YYYYMMDDHHmm")
-        ).length !== 0
-      );
+      return dayBasedExcludeCollection.filter(c => startDate <= c && endDate > c).length !== 0;
     }
     return false;
   };
