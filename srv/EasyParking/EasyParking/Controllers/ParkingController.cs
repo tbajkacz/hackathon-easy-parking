@@ -48,8 +48,9 @@ namespace EasyParking.Controllers
         [HttpPost]
         public async Task Add(ParkingAddParams param)
         {
-            param.OwnerId = HttpContext.User.GetId();
-            var parking = mapper.Map<ParkingAddParams, Parking>(param);
+            var ownerParam = mapper.Map<ParkingAddParams, ParkingAddWithOwnerParams>(param);
+            ownerParam.OwnerId = HttpContext.User.GetId();
+            var parking = mapper.Map<ParkingAddWithOwnerParams, Parking>(ownerParam);
             await parkingRepository.AddAsync(parking);
             await uow.CommitAsync();
         }

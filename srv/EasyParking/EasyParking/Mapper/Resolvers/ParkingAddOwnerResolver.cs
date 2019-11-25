@@ -6,7 +6,7 @@ using EasyParking.Users.Services;
 
 namespace EasyParking.Mapper.Resolvers
 {
-    public class ParkingAddOwnerResolver : IValueResolver<ParkingAddParams, Parking, UserAccount>
+    public class ParkingAddOwnerResolver : IValueResolver<ParkingAddWithOwnerParams, Parking, UserAccount>
     {
         private readonly IUserRepository userRepository;
 
@@ -14,7 +14,7 @@ namespace EasyParking.Mapper.Resolvers
         {
             this.userRepository = userRepository;
         }
-        public UserAccount Resolve(ParkingAddParams source, Parking destination, UserAccount destMember, ResolutionContext context)
+        public UserAccount Resolve(ParkingAddWithOwnerParams source, Parking destination, UserAccount destMember, ResolutionContext context)
         {
             return userRepository.GetByIdOrDefault(source.OwnerId);
         }
