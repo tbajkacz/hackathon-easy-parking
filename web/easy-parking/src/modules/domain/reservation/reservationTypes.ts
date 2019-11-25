@@ -6,7 +6,7 @@ export interface UserAccountParking {
   login: string;
 }
 
-export interface ParkingList {
+export interface Parking {
   id: number;
   name: string;
   address: string;
@@ -35,4 +35,9 @@ export interface ReserveData {
   spotNumber: number;
   from: string;
   to: string;
+}
+
+export interface SpotExclude {
+  spotNumber: number;
+  exclude: Date;
 }

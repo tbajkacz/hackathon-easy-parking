@@ -1,6 +1,6 @@
 import axios from "axios";
 import { UserAccount, SignInCredentials, SignUpCredentials } from "./authTypes";
-import { unwrap } from "../../common/serviceUtility";
+import { unwrap } from "../../common/serviceUnwrapUtility";
 import { ApiResponse } from "../../common/types";
 
 const signIn = (params?: SignInCredentials): Promise<ApiResponse<UserAccount>> => {

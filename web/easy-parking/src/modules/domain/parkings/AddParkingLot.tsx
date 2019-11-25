@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { AddParkingLotData } from "./parkingsTypes";
-import { imageUtility } from "../../../common/imageUtility";
+import imageUtility from "../../../common/imageUtility";
 import MainTemplate from "../../../templates/MainTemplate";
-import { parkingService } from "./parkingService";
+import parkingService from "./parkingService";
 import { useHistory } from "react-router";
 import { routes } from "../../../routes";
+import SectionName from "../../../common/SectionName";
 
 interface AddParkingLotProps {}
 
@@ -39,7 +40,7 @@ const AddParkingLot: React.FC<AddParkingLotProps> = props => {
 
   const onFormSubmit = (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    parkingService.Add(addParkingLotData).then(
+    parkingService.add(addParkingLotData).then(
       () => {
         setButtonContent("Operation successfull !");
         setTimeout(() => history.push(routes.reservation), 1000);
@@ -50,7 +51,7 @@ const AddParkingLot: React.FC<AddParkingLotProps> = props => {
 
   return (
     <MainTemplate>
-      <span className="title-parking-list">Add Parking:</span>
+      <SectionName>Add Parking:</SectionName>
       <form className="col-sm-12 col-md-4 offset-md-4 mt-2">
         <div className="form-group">
           <input
