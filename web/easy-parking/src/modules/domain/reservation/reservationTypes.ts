@@ -36,3 +36,8 @@ export interface ReserveData {
   from: string;
   to: string;
 }
+
+export interface SpotExclude {
+  spotNumber: number;
+  exclude: Date;
+}

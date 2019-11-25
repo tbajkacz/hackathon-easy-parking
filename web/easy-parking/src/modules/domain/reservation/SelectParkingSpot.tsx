@@ -3,7 +3,7 @@ import MainTemplate from "../../../templates/MainTemplate";
 import LoadingIndicator from "../../../utils/LoadingIndicator";
 import reservationService from "./reservationService";
 import { useParams, useHistory } from "react-router";
-import { Parking, ReserveData } from "./reservationTypes";
+import { Parking, ReserveData, SpotExclude } from "./reservationTypes";
 import { ApiResponse } from "../../../common/types";
 import "./SelectParkingSpot.scss";
 import { FormGroup, Input } from "reactstrap";
@@ -15,13 +15,17 @@ import DatePickerCalendar from "../../../common/DatePickerCalendar";
 
 interface SelectParkingSpotProps {}
 
-interface SpotExclude {
-  spotNumber: number;
-  exclude: Date;
-}
+const defaultReserveData = {
+  from: roundedDate(30).toISOString(),
+  to: roundedDataPlusHalfHour().toISOString(),
+  parkingId: 0,
+  spotNumber: 0,
+  vehicleRegistrationNumber: ""
+};
 
 const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
   const { parkingId } = useParams();
+  const history = useHistory();
   const [promise, setPromise] = useState<Promise<any> | undefined>(undefined);
   const [selectParking, setSelectParking] = useState<ApiResponse<Parking>>();
 
@@ -36,7 +40,11 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
     fetchParkingById();
   }, []);
 
+  const [startDate, setStartDate] = useState<Date | null>(roundedDate(30));
+  const [endDate, setEndDate] = useState<Date | null>(roundedDataPlusHalfHour());
+  const [reserveData, setReserveData] = useState<ReserveData>(defaultReserveData);
   const [selectSpot, setSelectSpot] = useState<number>(0);
+  const [vehicleRegistration, setVehicleRegistration] = useState<string>("");
 
   const handleChangeSelectSpot = (e: React.ChangeEvent<HTMLInputElement>, parkingId: number) => {
     const value = e.target.value;
@@ -69,7 +77,6 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
     }
   };
 
-  const [vehicleRegistration, setVehicleRegistration] = useState<string>("");
   const handleVehicleRegistrationNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     setVehicleRegistration(e.target.value);
     setReserveData({
@@ -77,18 +84,6 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
       [e.target.name]: e.target.value
     });
   };
-
-  const [startDate, setStartDate] = useState<Date | null>(roundedDate(30));
-  const [endDate, setEndDate] = useState<Date | null>(roundedDataPlusHalfHour());
-  const [reserveData, setReserveData] = useState<ReserveData>({
-    from: roundedDate(30).toISOString(),
-    to: roundedDataPlusHalfHour().toISOString(),
-    parkingId: 0,
-    spotNumber: 0,
-    vehicleRegistrationNumber: ""
-  });
-
-  const history = useHistory();
 
   const [buttonContent, setButtonContent] = useState("Reserve");
   const handleSendReserve = async () => {
@@ -105,31 +100,25 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
 
   const [timeExcludeCollection, setTimeExcludeCollection] = useState<SpotExclude[]>([]);
   const [dayBasedExcludeCollection, setDayBasedExcludeCollection] = useState<Date[]>();
-
   const updateTimeExcludes = () => {
     if (selectParking) {
       let excludeCollection: SpotExclude[] = [];
-      console.log(
-        selectParking.result.parkingSpots
-          .map(p => ({ reservations: p.reservations, spotNumber: p.spotNumber }))
-          .filter(r => r.reservations.length !== 0)
-          .flatMap(o =>
-            o.reservations.map(r => ({ untilUtc: r.untilUtc, fromUtc: r.fromUtc, spotNumber: o.spotNumber }))
-          )
-          .forEach(r => {
-            let startingDate = new Date(r.fromUtc);
-            let endingDate = new Date(r.untilUtc);
-            endingDate.setMinutes(endingDate.getMinutes() - 1);
-            do {
-              excludeCollection.push({ spotNumber: r.spotNumber, exclude: new Date(startingDate.toISOString()) });
-              startingDate.setMinutes(startingDate.getMinutes() + 30);
-            } while (startingDate < endingDate);
-          })
-      );
+      selectParking.result.parkingSpots
+        .map(p => ({ reservations: p.reservations, spotNumber: p.spotNumber }))
+        .filter(r => r.reservations.length !== 0)
+        .flatMap(o => o.reservations.map(r => ({ untilUtc: r.untilUtc, fromUtc: r.fromUtc, spotNumber: o.spotNumber })))
+        .forEach(r => {
+          let startingDate = new Date(r.fromUtc);
+          let endingDate = new Date(r.untilUtc);
+          endingDate.setMinutes(endingDate.getMinutes() - 1);
+          do {
+            excludeCollection.push({ spotNumber: r.spotNumber, exclude: new Date(startingDate.toISOString()) });
+            startingDate.setMinutes(startingDate.getMinutes() + 30);
+          } while (startingDate < endingDate);
+        });
       setTimeExcludeCollection(excludeCollection);
     }
   };
-  console.log(reserveData, "---reserveData");
 
   const isDisabledByDate = () => {
     if (startDate && endDate && dayBasedExcludeCollection) {
@@ -156,12 +145,11 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
             alt="place parking"
             className="selectParkingImage"
           />
-          <div style={{ padding: "5px 10px" }}>
+          <div className="wrap-form-parking-spot">
             <FormGroup className="mt-2">
               <Input
                 type="select"
                 name="spotNumber"
-                id="exampleSelect"
                 placeholder="Select spot"
                 onChange={e => {
                   const selectParkingId = selectParking ? selectParking.result.id : 0;
@@ -174,7 +162,6 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
                   selectParking.result.parkingSpots.map(spot => <option key={spot.id}>{spot.spotNumber}</option>)}
               </Input>
             </FormGroup>
-
             <div className="pl-3">From</div>
             <DatePickerCalendar
               defaultDate={startDate}
@@ -189,7 +176,6 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
               handleDatePicker={handleDatePicker}
               excludeTimes={dayBasedExcludeCollection}
             />
-
             <Input
               type="text"
               name="vehicleRegistrationNumber"
@@ -197,7 +183,6 @@ const SelectParkingSpot: React.FC<SelectParkingSpotProps> = props => {
               placeholder="Vehicle registration number"
               onChange={e => handleVehicleRegistrationNumber(e)}
             />
-
             <button
               type="button"
               className="btn btn-primary w-100 mt-2 mb-5 btn-reserve-parking"
