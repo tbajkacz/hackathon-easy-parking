@@ -19,15 +19,12 @@ namespace EasyParking.Controllers
     {
         private readonly IMapper mapper;
         private readonly IReservationRepository reservationRepository;
-        private readonly IParkingRepository parkingRepository;
         private readonly IUnitOfWork uow;
 
-        public ReservationsController(IMapper mapper, IReservationRepository reservationRepository,
-                                      IParkingRepository parkingRepository, IUnitOfWork uow)
+        public ReservationsController(IMapper mapper, IReservationRepository reservationRepository, IUnitOfWork uow)
         {
             this.mapper = mapper;
             this.reservationRepository = reservationRepository;
-            this.parkingRepository = parkingRepository;
             this.uow = uow;
         }
 
@@ -42,7 +39,7 @@ namespace EasyParking.Controllers
         [HttpPost]
         public async Task Reserve(ReserveParams param)
         {
-            await parkingRepository.ReserveSpotAsync(param, HttpContext.User.GetId());
+            await reservationRepository.ReserveSpotAsync(param, HttpContext.User.GetId());
             await uow.CommitAsync();
         }
 
@@ -58,7 +55,7 @@ namespace EasyParking.Controllers
         {
             return new IsAvailableDto
             {
-                IsAvailable = await parkingRepository.IsAvailable(param.ParkingId, param.SpotNumber, param.From, param.To)
+                IsAvailable = await reservationRepository.IsSpotAvailable(param.ParkingId, param.SpotNumber, param.From, param.To)
             };
         }
     }
