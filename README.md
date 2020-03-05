@@ -12,7 +12,7 @@
 
 ## Technologies
 - React, TypeScript, Bootstrap
-- C#, ASP.NET MVC, SQLite 
+- C#, ASP.NET Core, SQLite 
 
 ## Team
 - [Rafał Labisz](https://github.com/rafallabisz)
